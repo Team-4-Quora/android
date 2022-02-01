@@ -13,11 +13,96 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="#5D001E"
-      app:title="Home Page"
       app:titleTextColor="@color/white"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="8">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home Page"
+        android:textSize="24sp"
+        android:layout_weight="7"
+        android:textColor="@color/white"/>
+
+      <ImageView
+          android:id="@+id/iv_top_profile"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:tint="@color/white"
+          app:srcCompat="@drawable/ic_person" />
+
+    </LinearLayout>
+
+  </androidx.appcompat.widget.Toolbar>
+
+
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/bottom_toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#5D001E"
+      app:layout_constraintBaseline_toBottomOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:titleTextColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="12">
+
+      <ImageView
+          android:id="@+id/iv_home_bottom"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="3"
+          android:tint="@color/white"
+          app:srcCompat="@drawable/ic_home"/>
+
+      <ImageView
+          android:id="@+id/iv_follower_bottom"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="3"
+          android:tint="@color/white"
+          android:src="@drawable/ic_followers" />
+
+
+
+      <ImageView
+          android:id="@+id/iv_question_bottom"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="3"
+          android:tint="@color/white"
+          android:src="@drawable/ic_edit" />
+
+      <ImageView
+          android:id="@+id/iv_answer_bottom"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="3"
+          android:tint="@color/white"
+          android:src="@drawable/ic_answer" />
+
+    </LinearLayout>
+  </androidx.appcompat.widget.Toolbar>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
