@@ -18,5 +18,12 @@ public class HomePage extends AppCompatActivity {
             Intent i=new Intent(HomePage.this,QuestionActivity.class);
             startActivity(i);
         });
+
+        ImageView profile=findViewById(R.id.iv_top_profile);
+        profile.setOnClickListener(v ->{
+            Intent i=new Intent(HomePage.this,Profile.class);
+            startActivity(i);
+        });
+
     }
 }
