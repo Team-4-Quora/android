@@ -42,7 +42,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
         List<ApiHome> userDataList=new ArrayList<>();
         generatedata(userDataList);
         RecyclerView recyclerView=findViewById(R.id.recycleFeed);
-        HomePageAdapter recycleViewAdapter=new HomePageAdapter(userDataList,HomePage.this);
+        HomePageAdapter recycleViewAdapter=new HomePageAdapter(userDataList,HomePage.this , HomePage.this);
         LinearLayoutManager VerticalLayout= new LinearLayoutManager(HomePage.this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(VerticalLayout);
         recyclerView.setAdapter(recycleViewAdapter);
@@ -51,15 +51,14 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
     private void generatedata(List<ApiHome> apiHomes)
     {
-        apiHomes.add(new ApiHome("Palak","what is your fav colour?","Verma","Red"));
-        apiHomes.add(new ApiHome("Palak1","what is your fav colour?","Verma1","Red"));
-        apiHomes.add(new ApiHome("Palak2","what is your fav colour?","Verma2","Red"));
+        apiHomes.add(new ApiHome("Palak","what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?"));
+        apiHomes.add(new ApiHome("Palak1","what is your fav colour?"));
+        apiHomes.add(new ApiHome("Palak2","what is your fav colour?"));
 
     }
 
 
     @Override
     public void onUserClick(ApiHome apiproduct) {
-
     }
 }

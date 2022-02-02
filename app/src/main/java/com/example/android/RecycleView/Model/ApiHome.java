@@ -10,12 +10,10 @@ public class ApiHome {
     private String answerBy;
     private Date ansPostedOn;
 
-    public ApiHome(String questionBy,String question,String answerBy,String answer)
+    public ApiHome(String questionBy,String question)
     {
         this.questionBy=questionBy;
         this.question=question;
-        this.answerBy=answerBy;
-        this.answer=answer;
     }
     public String getQuestionBy() {
         return questionBy;

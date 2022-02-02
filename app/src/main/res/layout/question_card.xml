@@ -18,7 +18,7 @@
             android:id="@+id/question">
 
             <ImageView
-                android:id="@+id/feed_ques_iv"
+                android:id="@+id/ques_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
@@ -30,7 +30,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/feed_ques_name"
+                android:id="@+id/ques_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
@@ -38,11 +38,11 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.373"
-                app:layout_constraintStart_toEndOf="@+id/feed_ques_iv"
+                app:layout_constraintStart_toEndOf="@+id/ques_iv"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/feed_ques_time"
+                android:id="@+id/ques_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="74dp"
@@ -51,32 +51,31 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/feed_ques_iv"
-                app:layout_constraintTop_toBottomOf="@+id/feed_ques_name" />
+                app:layout_constraintStart_toEndOf="@+id/ques_iv"
+                app:layout_constraintTop_toBottomOf="@+id/ques_name" />
 
             <TextView
-                android:id="@+id/feed_ques"
+                android:id="@+id/ques"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="52dp"
-                android:text="Question"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Question"
                 android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feed_ques_time" />
+                app:layout_constraintTop_toBottomOf="@+id/ques_time" />
 
             <Button
                 android:id="@+id/bn_feed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:text="View More"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.914"
+                app:layout_constraintHorizontal_bias="0.928"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feed_ques" />
+                app:layout_constraintTop_toBottomOf="@+id/ques" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
