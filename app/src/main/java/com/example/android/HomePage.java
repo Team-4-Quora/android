@@ -1,12 +1,21 @@
 package com.example.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-public class HomePage extends AppCompatActivity {
+import com.example.android.RecycleView.HomePageAdapter;
+import com.example.android.RecycleView.Model.ApiHome;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiResponseClick{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +33,33 @@ public class HomePage extends AppCompatActivity {
             Intent i=new Intent(HomePage.this,Profile.class);
             startActivity(i);
         });
+
+       displayRecycle();
+
+    }
+
+    public void displayRecycle(){
+        List<ApiHome> userDataList=new ArrayList<>();
+        generatedata(userDataList);
+        RecyclerView recyclerView=findViewById(R.id.recycleFeed);
+        HomePageAdapter recycleViewAdapter=new HomePageAdapter(userDataList,HomePage.this);
+        LinearLayoutManager VerticalLayout= new LinearLayoutManager(HomePage.this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(VerticalLayout);
+        recyclerView.setAdapter(recycleViewAdapter);
+
+    }
+
+    private void generatedata(List<ApiHome> apiHomes)
+    {
+        apiHomes.add(new ApiHome("Palak","what is your fav colour?","Verma","Red"));
+        apiHomes.add(new ApiHome("Palak1","what is your fav colour?","Verma1","Red"));
+        apiHomes.add(new ApiHome("Palak2","what is your fav colour?","Verma2","Red"));
+
+    }
+
+
+    @Override
+    public void onUserClick(ApiHome apiproduct) {
 
     }
 }
