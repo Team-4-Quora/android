@@ -28,7 +28,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
             startActivity(i);
         });
 
-        ImageView profile=findViewById(R.id.iv_top_profile);
+        ImageView profile=findViewById(R.id.iv_profile_bottom);
         profile.setOnClickListener(v ->{
             Intent i=new Intent(HomePage.this,Profile.class);
             startActivity(i);
