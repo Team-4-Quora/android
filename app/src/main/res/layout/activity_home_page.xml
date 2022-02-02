@@ -44,6 +44,23 @@
 
   </androidx.appcompat.widget.Toolbar>
 
+  <androidx.appcompat.widget.SearchView
+      android:id="@+id/et_home_search"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginEnd="16dp"
+      android:ems="10"
+      app:queryHint="Search"
+      app:iconifiedByDefault="false"
+      android:inputType="textPersonName"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:drawableLeft="@drawable/search"
+      app:layout_constraintHorizontal_bias="0.497"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 
   <androidx.appcompat.widget.Toolbar
       android:id="@+id/bottom_toolbar"
@@ -68,19 +85,9 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
-          android:layout_weight="3"
+          android:layout_weight="4"
           android:tint="@color/white"
           app:srcCompat="@drawable/ic_home"/>
-
-      <ImageView
-          android:id="@+id/iv_follower_bottom"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_weight="3"
-          android:tint="@color/white"
-          android:src="@drawable/ic_followers" />
-
 
 
       <ImageView
@@ -88,7 +95,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
-          android:layout_weight="3"
+          android:layout_weight="4"
           android:tint="@color/white"
           android:src="@drawable/ic_edit" />
 
@@ -97,7 +104,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
-          android:layout_weight="3"
+          android:layout_weight="4"
           android:tint="@color/white"
           android:src="@drawable/ic_answer" />
 
