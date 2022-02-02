@@ -103,7 +103,6 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
       android:layout_marginTop="120dp"
-      android:layout_marginEnd="16dp"
       android:drawableLeft="@drawable/search"
       android:ems="10"
       android:inputType="textPersonName"
@@ -168,14 +167,6 @@
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recycleFeed"
       android:layout_width="match_parent"
-<<<<<<< HEAD
-      android:layout_height="wrap_content"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.043"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/et_home_search"
-      app:layout_constraintVertical_bias="0.072" />
-=======
       android:layout_height="440dp"
       app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar"
       app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +174,6 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/toolbar"
       app:layout_constraintVertical_bias="1.0" />
->>>>>>> 487e275892f672749a6c211ef13786f28a604cec
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
