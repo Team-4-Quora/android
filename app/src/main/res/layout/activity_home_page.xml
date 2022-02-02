@@ -38,29 +38,81 @@
           android:layout_gravity="center"
           android:layout_weight="1"
           android:tint="@color/white"
-          app:srcCompat="@drawable/ic_person" />
+          app:srcCompat="@drawable/ic_login" />
+
 
     </LinearLayout>
 
   </androidx.appcompat.widget.Toolbar>
+
+
+
+  <ImageView
+      android:id="@+id/categ_img1"
+      android:layout_width="66dp"
+      android:layout_height="75dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="12dp"
+      android:src="@drawable/mickey"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+  <ImageView
+      android:id="@+id/categ_img2"
+      android:layout_width="66dp"
+      android:layout_height="75dp"
+      android:layout_marginStart="88dp"
+      android:layout_marginTop="12dp"
+      android:src="@drawable/mickey"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+  <ImageView
+      android:id="@+id/categ_img3"
+      android:layout_width="66dp"
+      android:layout_height="75dp"
+      android:layout_marginStart="160dp"
+      android:layout_marginTop="12dp"
+      android:src="@drawable/mickey"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+  <ImageView
+      android:id="@+id/categ_img4"
+      android:layout_width="66dp"
+      android:layout_height="75dp"
+      android:layout_marginStart="232dp"
+      android:layout_marginTop="12dp"
+      android:src="@drawable/mickey"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+  <ImageView
+      android:id="@+id/categ_img5"
+      android:layout_width="66dp"
+      android:layout_height="75dp"
+      android:layout_marginStart="308dp"
+      android:layout_marginTop="12dp"
+      android:src="@drawable/mickey"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
   <androidx.appcompat.widget.SearchView
       android:id="@+id/et_home_search"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
-      android:layout_marginTop="20dp"
+      android:layout_marginTop="120dp"
       android:layout_marginEnd="16dp"
-      android:ems="10"
-      app:queryHint="Search"
-      app:iconifiedByDefault="false"
-      android:inputType="textPersonName"
-      app:layout_constraintEnd_toEndOf="parent"
       android:drawableLeft="@drawable/search"
-      app:layout_constraintHorizontal_bias="0.497"
+      android:ems="10"
+      android:inputType="textPersonName"
+      app:iconifiedByDefault="false"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      app:queryHint="Search" />
 
   <androidx.appcompat.widget.Toolbar
       android:id="@+id/bottom_toolbar"
@@ -72,6 +124,8 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      app:layout_constraintVertical_bias="1.0"
       app:titleTextColor="@color/white">
 
     <LinearLayout
@@ -87,7 +141,7 @@
           android:layout_gravity="center"
           android:layout_weight="4"
           android:tint="@color/white"
-          app:srcCompat="@drawable/ic_home"/>
+          app:srcCompat="@drawable/ic_home" />
 
 
       <ImageView
@@ -96,17 +150,17 @@
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_weight="4"
-          android:tint="@color/white"
-          android:src="@drawable/ic_edit" />
+          android:src="@drawable/ic_edit"
+          android:tint="@color/white" />
 
       <ImageView
-          android:id="@+id/iv_answer_bottom"
+          android:id="@+id/iv_profile_bottom"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_weight="4"
-          android:tint="@color/white"
-          android:src="@drawable/ic_answer" />
+          android:src="@drawable/ic_person"
+          android:tint="@color/white" />
 
     </LinearLayout>
   </androidx.appcompat.widget.Toolbar>
@@ -114,12 +168,22 @@
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recycleFeed"
       android:layout_width="match_parent"
+<<<<<<< HEAD
       android:layout_height="wrap_content"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.043"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/et_home_search"
       app:layout_constraintVertical_bias="0.072" />
+=======
+      android:layout_height="440dp"
+      app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      app:layout_constraintVertical_bias="1.0" />
+>>>>>>> 487e275892f672749a6c211ef13786f28a604cec
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
