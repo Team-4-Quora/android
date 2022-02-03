@@ -5,7 +5,7 @@ import java.util.Date;
 public class ApiAnswer {
 
     private String id;
-    private String meassage;
+    private String message;
     private String answerBy;
     private Date postedOn;
     private String questionId;
@@ -23,12 +23,12 @@ public class ApiAnswer {
         this.id = id;
     }
 
-    public String getMeassage() {
-        return meassage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMeassage(String meassage) {
-        this.meassage = meassage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getAnswerBy() {
