@@ -57,7 +57,7 @@ public class FollowerAdapter extends RecyclerView.Adapter<FollowerAdapter.ViewHo
     }
     @Override
     public int getItemCount() {
-        return 0;
+        return apiResponseList.size();
     }
 
     public interface IApiResponseClick {

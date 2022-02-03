@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.android.RecycleView.HomePageAdapter;
+import com.example.android.RecycleView.Model.ApiAdvertise;
 import com.example.android.RecycleView.Model.ApiHome;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiResponseClick{
+public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiResponseClick , HomePageAdapter.IAddRespClick{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,10 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
     public void displayRecycle(){
         List<ApiHome> userDataList=new ArrayList<>();
         generatedata(userDataList);
+        List<ApiAdvertise> userAdsDataList=new ArrayList<>();
+        generateads(userAdsDataList);
         RecyclerView recyclerView=findViewById(R.id.recycleFeed);
-        HomePageAdapter recycleViewAdapter=new HomePageAdapter(userDataList,HomePage.this , HomePage.this);
+        HomePageAdapter recycleViewAdapter=new HomePageAdapter(userDataList,userAdsDataList , HomePage.this,HomePage.this,HomePage.this);
         LinearLayoutManager VerticalLayout= new LinearLayoutManager(HomePage.this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(VerticalLayout);
         recyclerView.setAdapter(recycleViewAdapter);
@@ -57,8 +60,18 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
     }
 
+    private void generateads(List<ApiAdvertise> apiAdvertises)
+    {
+        apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
+    }
+
 
     @Override
     public void onUserClick(ApiHome apiproduct) {
+    }
+
+    @Override
+    public void onUserClickadd(ApiAdvertise apiAdvertise) {
+
     }
 }

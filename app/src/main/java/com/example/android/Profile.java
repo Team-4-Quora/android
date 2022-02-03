@@ -1,15 +1,13 @@
 package com.example.android;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
 import com.example.android.RecycleView.FollowerAdapter;
-import com.example.android.RecycleView.HomePageAdapter;
 import com.example.android.RecycleView.Model.ApiFollowers;
-import com.example.android.RecycleView.Model.ApiHome;
 
 import java.util.ArrayList;
 import java.util.List;

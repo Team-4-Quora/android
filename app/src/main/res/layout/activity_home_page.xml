@@ -46,11 +46,10 @@
   </androidx.appcompat.widget.Toolbar>
 
 
-
   <ImageView
       android:id="@+id/categ_img1"
-      android:layout_width="66dp"
-      android:layout_height="75dp"
+      android:layout_width="55dp"
+      android:layout_height="67dp"
       android:layout_marginStart="16dp"
       android:layout_marginTop="12dp"
       android:src="@drawable/mickey"
@@ -167,10 +166,6 @@
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recycleFeed"
       android:layout_width="match_parent"
-<<<<<<< HEAD
-
-=======
->>>>>>> cb67e886406eb954bcb50d708472afd0ecbf2a7a
       android:layout_height="440dp"
       app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar"
       app:layout_constraintEnd_toEndOf="parent"
@@ -178,9 +173,4 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/toolbar"
       app:layout_constraintVertical_bias="1.0" />
-<<<<<<< HEAD
-=======
-
-
->>>>>>> cb67e886406eb954bcb50d708472afd0ecbf2a7a
 </androidx.constraintlayout.widget.ConstraintLayout>
