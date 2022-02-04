@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E3E2DF"
-    tools:context=".Answer">
+    tools:context=".Comment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarcomment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#5D001E"
@@ -16,69 +16,59 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Answer"
+        app:title="Comments"
         app:titleTextColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_curr_ques"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="Question"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/comment_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="32dp"
-        android:text="Add your answer"
+        android:layout_marginTop="44dp"
+        android:text="Comment will be shown"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_curr_ques" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarcomment" />
 
     <EditText
-        android:id="@+id/et_ans"
+        android:id="@+id/addcomment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="36dp"
-        android:hint="Type your answer"
+        android:layout_marginTop="35dp"
+        android:hint="Add a comment..."
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/comment_textview" />
 
     <Button
-        android:id="@+id/ans_post"
+        android:id="@+id/commentpost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="#5D001E"
         android:text="Post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_ans" />
+        app:layout_constraintTop_toBottomOf="@+id/addcomment" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleans"
-        android:layout_width="match_parent"
-        android:layout_height="312dp"
+        android:id="@+id/recyclecomment"
+        android:layout_width="411dp"
+        android:layout_height="319dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ans_post"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintTop_toBottomOf="@+id/commentpost"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

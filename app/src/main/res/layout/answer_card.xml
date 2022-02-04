@@ -74,12 +74,12 @@
                 android:id="@+id/upvote"
                 android:layout_width="99dp"
                 android:layout_height="53dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="44dp"
                 android:backgroundTint="#5D001E"
                 android:src="@drawable/ic_arrow_up"
                 android:tint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintHorizontal_bias="0.054"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/answer" />
 
@@ -88,27 +88,39 @@
                 android:layout_width="99dp"
                 android:layout_height="53dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="44dp"
                 android:backgroundTint="#5D001E"
                 android:src="@drawable/ic_arrow_downward"
                 android:tint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.042"
+                app:layout_constraintHorizontal_bias="0.051"
                 app:layout_constraintStart_toEndOf="@+id/upvote"
                 app:layout_constraintTop_toBottomOf="@+id/answer" />
 
             <ImageButton
+                android:id="@+id/share_bn"
                 android:layout_width="99dp"
                 android:layout_height="53dp"
-                android:id="@+id/share_bn"
                 android:layout_marginStart="44dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="48dp"
                 android:backgroundTint="#5D001E"
-                android:tint="@color/white"
                 android:src="@drawable/ic_baseline_share_24"
+                android:tint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/downvote"
+                app:layout_constraintTop_toBottomOf="@+id/answer" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/commentbutton"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#5D001E"
+                android:text="See comments"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/answer" />
 
 

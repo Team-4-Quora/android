@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Answer;
+import com.example.android.Comment;
 import com.example.android.R;
 import com.example.android.RecycleView.Model.ApiAnswer;
 import com.example.android.RecycleView.Model.ApiQuestion;
@@ -33,11 +34,13 @@ import retrofit2.Retrofit;
 public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.ViewHolderAns>{
     private final List<ApiAnswer> apiResponseList;
     private final IApiResponseClick mUserDataInterface;
+
     private final Context context ;
     public AnswerPageAdapter(List<ApiAnswer> apiResponseList, IApiResponseClick iApiResponseClick ,Context context) {
-        this.context=context;
+
         this.apiResponseList = apiResponseList;
         this.mUserDataInterface = iApiResponseClick;
+        this.context=context;
     }
 
 
@@ -99,12 +102,17 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
 
 
         //  Glide.with(holder.quesimg.getContext()).load(apiAnswer.getImage()).placeholder(R.drawable.ic_login).into(holder.quesimg);
+        holder.comment.setOnClickListener(v -> {
+            Intent i=new Intent(context, Comment.class);
+            context.startActivity(i);
+        });
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mUserDataInterface.onUserClick(apiAnswer);
             }
         });
+
     }
 
     @Override
@@ -125,6 +133,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
         private final ImageButton upvote;
         private final ImageButton downvote;
         private final ImageButton share;
+        private final Button  comment;
 
 
 
@@ -138,7 +147,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
             share=view.findViewById(R.id.share_bn);
             upvote=view.findViewById(R.id.upvote);
             downvote=view.findViewById(R.id.downvote);
-
+            comment=view.findViewById(R.id.commentbutton);
 
         }
     }

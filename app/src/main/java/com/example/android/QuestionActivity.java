@@ -77,7 +77,7 @@ public class QuestionActivity extends AppCompatActivity {
         QuestionDto questionDto=new QuestionDto();
 
         questionDto.setQuestionBy("vinaymatta63@gmail.com");
-        questionDto.setText("hi ?");
+        questionDto.setText(ques_content.getText().toString());
         System.out.println("===="+questionDto.getText());
         questionDto.setCategory(cate + "");
 

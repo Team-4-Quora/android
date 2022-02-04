@@ -133,12 +133,14 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
     {
         Retrofit retrofit= RetrofitQnaBuilder.getInstance();
         IPostQna iPostQna=retrofit.create(IPostQna.class);
-        Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category",cate+"");
+        Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category","LifeStyle");
 
         feedQues.enqueue(new Callback<List<QuestionDto>>() {
             @Override
             public void onResponse(Call<List<QuestionDto>> call, Response<List<QuestionDto>> response) {
                 List<QuestionDto> questionDto=response.body();
+                System.out.println("I am herre");
+               // System.out.println(response.body().get(0).getText());
 
                 for(int i=0;i<questionDto.size();i++)
                 {
@@ -147,7 +149,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
                     apiQuestion.setPostedOn(questionDto.get(i).getPostedOn());
                     apiQuestion.setContent(questionDto.get(i).getText());
                     apiQuestion.setCategory(questionDto.get(i).getCategory());
-
+                    System.out.println(apiQuestion.getContent()+"Question here");
                     apiQuestions.add(apiQuestion);
                 }
 
@@ -170,7 +172,6 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
     {
         apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
     }
-
 
     @Override
     public void onUserClick(ApiQuestion apiQuestion) {

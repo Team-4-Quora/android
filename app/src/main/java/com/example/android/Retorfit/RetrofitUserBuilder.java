@@ -16,7 +16,7 @@ public class RetrofitUserBuilder {
         if (instance == null) {
             synchronized (RetrofitUserBuilder.class) {
                 if (instance == null) {
-                    instance = new Retrofit.Builder().baseUrl("http://10.177.1.115:8080/")
+                    instance = new Retrofit.Builder().baseUrl("http://10.1.177.115:8080/")
                             .addConverterFactory(GsonConverterFactory.create()).client(new OkHttpClient()).build();
                 }
             }

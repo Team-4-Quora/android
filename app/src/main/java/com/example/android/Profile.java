@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     private void displaydetails(){
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<UserDto> userDtoCall=iPostUser.getUserStats("vpalak106@gmail.com");
+        Call<UserDto> userDtoCall=iPostUser.getUserStats("fggjh@gmail.com");
         userDtoCall.enqueue(new Callback<UserDto>() {
             @Override
             public void onResponse(Call<UserDto> call, Response<UserDto> response) {
@@ -67,7 +68,6 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
         LinearLayoutManager HorizontalLayout= new LinearLayoutManager(Profile.this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(HorizontalLayout);
         recyclerView.setAdapter(recycleViewAdapter);
-
     }
     private void generatedata(List<ApiFollowers> apiFollowers)
     {
@@ -77,6 +77,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
 
     @Override
     public void onUserClick(ApiFollowers apiproduct) {
-
+        Intent i=new Intent(Profile.this,Profile.class);
+        startActivity(i);
     }
 }
