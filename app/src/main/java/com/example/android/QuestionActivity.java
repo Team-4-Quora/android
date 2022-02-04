@@ -19,6 +19,7 @@ import retrofit2.Retrofit;
 
 public class QuestionActivity extends AppCompatActivity {
     Button ques;
+    EditText ques_content;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         ques.setOnClickListener(view -> {
             addquestion();
+            ques_content.getText().clear();
         });
 
     }
@@ -37,9 +39,12 @@ public class QuestionActivity extends AppCompatActivity {
         Retrofit retrofit=RetrofitQnaBuilder.getInstance();
         IPostQna iPostQna=retrofit.create(IPostQna.class);
 
+        ques_content=findViewById(R.id.et_ques);
+
         QuestionDto questionDto=new QuestionDto();
+
         questionDto.setQuestionBy("vinaymatta63@gmail.com");
-        questionDto.setQues("where are you now?");
+        questionDto.setQues(ques_content.getText().toString());
 
         Call<Void> quesresponse=iPostQna.saveques(questionDto);
         quesresponse.enqueue(new Callback<Void>() {

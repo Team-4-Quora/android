@@ -1,5 +1,6 @@
 package com.example.android.Retorfit;
 
+import com.example.android.Retorfit.Model.AnswerDto;
 import com.example.android.Retorfit.Model.QuestionDto;
 import com.example.android.Retorfit.Model.ReactionDto;
 
@@ -14,5 +15,10 @@ public interface IPostQna {
 
         @POST("qna/question/add")
         Call<Void> saveques(@Body QuestionDto questionDto);
+
+
+
+        @POST("qna/answer/add")
+        Call<Void> saveans(@Body AnswerDto answerDto);
 
 }
