@@ -5,20 +5,19 @@ public class QuestionDto {
     private String orgId;
     private String questionBy;
     private Long postedOn;
-    private String ques;
+    private String text;
     private String shareableLink;
     private Boolean isThreadClosed=false;
     private String category;
     private String acceptedAnswer;
     private Boolean isModerated=false;
 
-
-    public String getQues() {
-        return ques;
+    public String getText() {
+        return text;
     }
 
-    public void setQues(String ques) {
-        this.ques = ques;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getId() {
