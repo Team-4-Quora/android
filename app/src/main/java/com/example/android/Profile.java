@@ -1,5 +1,6 @@
 package com.example.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +30,6 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
         LinearLayoutManager HorizontalLayout= new LinearLayoutManager(Profile.this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(HorizontalLayout);
         recyclerView.setAdapter(recycleViewAdapter);
-
     }
     private void generatedata(List<ApiFollowers> apiFollowers)
     {
@@ -39,6 +39,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
 
     @Override
     public void onUserClick(ApiFollowers apiproduct) {
-
+        Intent i=new Intent(Profile.this,Profile.class);
+        startActivity(i);
     }
 }

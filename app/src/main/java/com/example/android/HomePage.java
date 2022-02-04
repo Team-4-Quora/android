@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.example.android.RecycleView.HomePageAdapter;
 import com.example.android.RecycleView.Model.ApiAdvertise;
 import com.example.android.RecycleView.Model.ApiHome;
+import com.example.android.RecycleView.Model.ApiQuestion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
         question.setOnClickListener(v ->{
             Intent i=new Intent(HomePage.this,QuestionActivity.class);
             startActivity(i);
+
         });
 
         ImageView profile=findViewById(R.id.iv_profile_bottom);
@@ -40,7 +42,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
     }
 
     public void displayRecycle(){
-        List<ApiHome> userDataList=new ArrayList<>();
+        List<ApiQuestion> userDataList=new ArrayList<>();
         generatedata(userDataList);
         List<ApiAdvertise> userAdsDataList=new ArrayList<>();
         generateads(userAdsDataList);
@@ -52,11 +54,11 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
     }
 
-    private void generatedata(List<ApiHome> apiHomes)
+    private void generatedata(List<ApiQuestion> apiQuestions)
     {
-        apiHomes.add(new ApiHome("Palak","what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?"));
-        apiHomes.add(new ApiHome("Palak1","what is your fav colour?"));
-        apiHomes.add(new ApiHome("Palak2","what is your fav colour?"));
+        apiQuestions.add(new ApiQuestion("Palak","what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?"));
+        apiQuestions.add(new ApiQuestion("Palak1","what is your fav colour?"));
+        apiQuestions.add(new ApiQuestion("Palak2","what is your fav colour?"));
 
     }
 
@@ -65,9 +67,10 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
         apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
     }
 
-
     @Override
-    public void onUserClick(ApiHome apiproduct) {
+    public void onUserClick(ApiQuestion apiQuestion) {
+//        Intent i=new Intent(HomePage.this,Answer.class);
+//        startActivity(i);
     }
 
     @Override

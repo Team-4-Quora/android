@@ -1,26 +1,24 @@
-package com.example.android.RecycleView.Model;
+package com.example.android.Retorfit.Model;
 
-import android.text.BoringLayout;
-
-import java.util.Date;
-
-public class ApiQuestion {
+public class QuestionDto {
     private String id;
     private String orgId;
     private String questionBy;
-    private Date postedOn;
-    private String content;
+    private Long postedOn;
+    private String ques;
     private String shareableLink;
-    private Boolean threadClosed;
+    private Boolean isThreadClosed=false;
     private String category;
-    private String acceptedAnsId;
-    private Boolean isModerated;
+    private String acceptedAnswer;
+    private Boolean isModerated=false;
 
-    public ApiQuestion(String questionBy,String content)
-    {
-        this.questionBy=questionBy;
-        this.content=content;
 
+    public String getQues() {
+        return ques;
+    }
+
+    public void setQues(String ques) {
+        this.ques = ques;
     }
 
     public String getId() {
@@ -47,20 +45,12 @@ public class ApiQuestion {
         this.questionBy = questionBy;
     }
 
-    public Date getPostedOn() {
+    public Long getPostedOn() {
         return postedOn;
     }
 
-    public void setPostedOn(Date postedOn) {
+    public void setPostedOn(Long postedOn) {
         this.postedOn = postedOn;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public String getShareableLink() {
@@ -72,11 +62,11 @@ public class ApiQuestion {
     }
 
     public Boolean getThreadClosed() {
-        return threadClosed;
+        return isThreadClosed;
     }
 
     public void setThreadClosed(Boolean threadClosed) {
-        this.threadClosed = threadClosed;
+        isThreadClosed = threadClosed;
     }
 
     public String getCategory() {
@@ -87,12 +77,12 @@ public class ApiQuestion {
         this.category = category;
     }
 
-    public String getAcceptedAnsId() {
-        return acceptedAnsId;
+    public String getAcceptedAnswer() {
+        return acceptedAnswer;
     }
 
-    public void setAcceptedAnsId(String acceptedAnsId) {
-        this.acceptedAnsId = acceptedAnsId;
+    public void setAcceptedAnswer(String acceptedAnswer) {
+        this.acceptedAnswer = acceptedAnswer;
     }
 
     public Boolean getModerated() {

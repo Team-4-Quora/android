@@ -15,6 +15,12 @@ public class ApiAnswer {
     private String acceptedAnsId;
     private Boolean isModerated;
 
+    public ApiAnswer(String answerBy,String message)
+    {
+        this.answerBy=answerBy;
+        this.message=message;
+    }
+
     public String getId() {
         return id;
     }

@@ -14,19 +14,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.android.Answer;
 import com.example.android.R;
 import com.example.android.RecycleView.Model.ApiAdvertise;
 import com.example.android.RecycleView.Model.ApiHome;
+import com.example.android.RecycleView.Model.ApiQuestion;
 
 import java.util.List;
 
 public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG="RecyclerAdapter";
-    private final List<ApiHome> apiResponseList;
+    private final List<ApiQuestion> apiResponseList;
     private final List<ApiAdvertise> apiAdvertiseList;
     private final IApiResponseClick mUserDataInterface;
     private static Integer postsize=0;
@@ -34,7 +32,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final IAddRespClick iAddRespClick;
     private Context context;
 
-    public HomePageAdapter(List<ApiHome> apiResponseList, List<ApiAdvertise> apiAdvertiseList, IApiResponseClick mUserDataInterface, IAddRespClick iAddRespClick, Context context) {
+    public HomePageAdapter(List<ApiQuestion> apiResponseList, List<ApiAdvertise> apiAdvertiseList, IApiResponseClick mUserDataInterface, IAddRespClick iAddRespClick, Context context) {
         this.apiResponseList = apiResponseList;
         this.apiAdvertiseList = apiAdvertiseList;
         this.mUserDataInterface = mUserDataInterface;
@@ -48,7 +46,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //        this.mUserDataInterface = mUserDataInterface;
 //        this.context = context;
 //    }
-
     @Override
     public int getItemViewType(int position) {
         if(position%2==0){
@@ -68,7 +65,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return new ViewHolderOne(view);}
 
         else{ view = layoutInflater.inflate(R.layout.card_advertise, parent, false);
-        return new EmptyViewHolder(view);}
+            return new EmptyViewHolder(view);}
     }
 
     @Override
@@ -76,15 +73,15 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if(position%2==0 && apiResponseList.size()>postsize)
         {
             ViewHolderOne viewHolder=(ViewHolderOne) holder;
-            ApiHome apiHome = apiResponseList.get(postsize);
+            ApiQuestion apiHome = apiResponseList.get(postsize);
             postsize++;
-        viewHolder.quesName.setText(apiHome.getQuestionBy());
-        viewHolder.ques.setText(apiHome.getQuestion()+"");
-        viewHolder.quesdate.setText(apiHome.getQuesPostedOn()+"");
-        viewHolder.viewmore.setOnClickListener(v -> {
-            Intent i=new Intent(context, Answer.class);
-            context.startActivity(i);
-        });
+            viewHolder.quesName.setText(apiHome.getQuestionBy());
+            viewHolder.ques.setText(apiHome.getContent()+"");
+            viewHolder.quesdate.setText(apiHome.getPostedOn()+"");
+            viewHolder.viewmore.setOnClickListener(v -> {
+                Intent i=new Intent(context, Answer.class);
+                context.startActivity(i);
+            });
             ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
         }
         else if (apiAdvertiseList.size() >adsize){
@@ -93,9 +90,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //            Glide.with(((EmptyViewHolder) holder).advertiseimg.getContext()).load(apiAdvertise.getImage()).placeholder(R.drawable.ic_login).into(((EmptyViewHolder) holder).advertiseimg);
 //            RequestOptions options = new RequestOptions().dontTransform()
 //                    .diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(placeholder);
-//            if (null != context && !TextUtils.isEmpty("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg") && null != imageView) {
-//                Glide.with(context).load(getGlideUrl("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg")).apply(options).into(imageView);
-//            }
+//            if (null != context && !TextUtils.isEmpty("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg") && null != imageView) {//                Glide.with(context).load(getGlideUrl("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg")).apply(options).into(imageView);//            }
             ((EmptyViewHolder) holder).rootView2.setOnClickListener(v ->
                     iAddRespClick.onUserClickadd(apiAdvertise));
         }
@@ -107,11 +102,11 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface IApiResponseClick {
-        void onUserClick(ApiHome apiHome);
+        void onUserClick(ApiQuestion apiQuestion);
     }
 
     public interface IAddRespClick{
-         void onUserClickadd(ApiAdvertise apiAdvertise);
+        void onUserClickadd(ApiAdvertise apiAdvertise);
     }
 
     public class ViewHolderOne extends RecyclerView.ViewHolder {
@@ -121,17 +116,17 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private final TextView quesdate;
         private final TextView ques;
         private final Button  viewmore;
-        
+
 
 
         public ViewHolderOne(@NonNull View view) {
             super(view);
             rootView = view;
-          ques=view.findViewById(R.id.ques);
-          quesName=view.findViewById(R.id.ques_name);
-          quesimg=view.findViewById(R.id.ques_iv);
-          quesdate=view.findViewById(R.id.ques_time);
-          viewmore=view.findViewById(R.id.bn_feed);
+            ques=view.findViewById(R.id.ques);
+            quesName=view.findViewById(R.id.ques_name);
+            quesimg=view.findViewById(R.id.ques_iv);
+            quesdate=view.findViewById(R.id.ques_time);
+            viewmore=view.findViewById(R.id.bn_feed);
 
         }
     }
