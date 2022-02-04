@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.RecycleView.AnswerPageAdapter;
@@ -27,14 +29,20 @@ import retrofit2.Retrofit;
 
 public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiResponseClick{
 
-    EditText ans_text,ques_text;
+    EditText ans_text;
     Button post_ans;
+    Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
+        i=getIntent();
+        String quesText=i.getExtras().getString("QuesText");
+//        String quesId=i.getExtras().getString("QuestionId");
 
+        TextView ques_text=findViewById(R.id.tv_curr_ques);
+        ques_text.setText(quesText);
         post_ans=findViewById(R.id.ans_post);
         post_ans.setOnClickListener(v -> {
             saveAnswer();

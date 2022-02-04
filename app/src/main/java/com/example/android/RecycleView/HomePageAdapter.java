@@ -80,6 +80,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.quesdate.setText(apiHome.getPostedOn()+"");
             viewHolder.viewmore.setOnClickListener(v -> {
                 Intent i=new Intent(context, Answer.class);
+              //  i.putExtra("QuestionId",apiHome.getId());
+                i.putExtra("QuesText",apiHome.getContent());
                 context.startActivity(i);
             });
             ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
