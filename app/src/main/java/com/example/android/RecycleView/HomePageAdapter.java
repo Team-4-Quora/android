@@ -16,14 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.Answer;
 import com.example.android.R;
 import com.example.android.RecycleView.Model.ApiHome;
+import com.example.android.RecycleView.Model.ApiQuestion;
 
 import java.util.List;
 
 public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHolder> {
-    private final List<ApiHome> apiResponseList;
+    private final List<ApiQuestion> apiResponseList;
     private final IApiResponseClick mUserDataInterface;
     private Context context;
-    public HomePageAdapter(List<ApiHome> apiResponseList, IApiResponseClick iApiResponseClick,Context context) {
+    public HomePageAdapter(List<ApiQuestion> apiResponseList, IApiResponseClick iApiResponseClick,Context context) {
         this.apiResponseList = apiResponseList;
         this.mUserDataInterface = iApiResponseClick;
         this.context = context;
@@ -40,10 +41,10 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ApiHome apiHome = apiResponseList.get(position);
-        holder.quesName.setText(apiHome.getQuestionBy()+"");
-        holder.ques.setText(apiHome.getQuestion()+"");
-        holder.quesdate.setText(apiHome.getQuesPostedOn()+"");
+        ApiQuestion apiQuestion = apiResponseList.get(position);
+        holder.quesName.setText(apiQuestion.getQuestionBy()+"");
+        holder.ques.setText(apiQuestion.getContent()+"");
+        holder.quesdate.setText(apiQuestion.getPostedOn()+"");
         holder.viewmore.setOnClickListener(v -> {
             Intent i=new Intent(context, Answer.class);
             context.startActivity(i);
@@ -55,7 +56,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mUserDataInterface.onUserClick(apiHome);
+                mUserDataInterface.onUserClick(apiQuestion);
             }
         });
     }
@@ -66,7 +67,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
     }
 
     public interface IApiResponseClick {
-        void onUserClick(ApiHome apiproduct);
+        void onUserClick(ApiQuestion apiQuestion);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -86,7 +87,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.ViewHo
           quesName=view.findViewById(R.id.ques_name);
           quesimg=view.findViewById(R.id.ques_iv);
           quesdate=view.findViewById(R.id.ques_time);
-          viewmore=view.findViewById(R.id.bn_feed);
+          viewmore=view.findViewById(R.id.bn_ques);
 
         }
     }

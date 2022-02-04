@@ -5,7 +5,7 @@ import java.util.Date;
 public class ApiAnswer {
 
     private String id;
-    private String meassage;
+    private String message;
     private String answerBy;
     private Date postedOn;
     private String questionId;
@@ -14,6 +14,12 @@ public class ApiAnswer {
     private String msgType;
     private String acceptedAnsId;
     private Boolean isModerated;
+
+    public ApiAnswer(String answerBy,String message)
+    {
+        this.answerBy=answerBy;
+        this.message=message;
+    }
 
     public String getId() {
         return id;
@@ -24,11 +30,11 @@ public class ApiAnswer {
     }
 
     public String getMeassage() {
-        return meassage;
+        return message;
     }
 
     public void setMeassage(String meassage) {
-        this.meassage = meassage;
+        this.message = meassage;
     }
 
     public String getAnswerBy() {
