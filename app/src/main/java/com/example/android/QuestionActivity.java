@@ -35,7 +35,6 @@ public class QuestionActivity extends AppCompatActivity {
 
         ques.setOnClickListener(view -> {
             addquestion();
-            ques_content.getText().clear();
             Intent i= new Intent(QuestionActivity.this,HomePage.class);
             startActivity(i);
             finish();
@@ -78,13 +77,17 @@ public class QuestionActivity extends AppCompatActivity {
         QuestionDto questionDto=new QuestionDto();
 
         questionDto.setQuestionBy("vinaymatta63@gmail.com");
-        questionDto.setQues(ques_content.getText().toString());
+        questionDto.setText("hi ?");
+        System.out.println("===="+questionDto.getText());
         questionDto.setCategory(cate + "");
+
+        //ques_content.getText().clear();
 
         Call<Void> quesresponse=iPostQna.saveques(questionDto);
         quesresponse.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println("=============="+response.body().toString());
                 Toast.makeText(QuestionActivity.this,"successfull",Toast.LENGTH_SHORT).show();
             }
 

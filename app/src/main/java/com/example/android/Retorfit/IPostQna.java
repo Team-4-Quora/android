@@ -26,4 +26,8 @@ public interface IPostQna {
         @POST("qna/answer/add")
         Call<Void> saveans(@Body AnswerDto answerDto);
 
+
+        @GET("qna/question/fetch/{type}/{value}")
+        Call<List<QuestionDto>> fetchquesByValue(@Path(value = "type") String type, @Path(value="value") String value);
+
 }

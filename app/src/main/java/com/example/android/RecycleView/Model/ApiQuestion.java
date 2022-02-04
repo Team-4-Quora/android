@@ -8,7 +8,7 @@ public class ApiQuestion {
     private String id;
     private String orgId;
     private String questionBy;
-    private Date postedOn;
+    private Long postedOn;
     private String content;
     private String shareableLink;
     private Boolean threadClosed;
@@ -16,7 +16,11 @@ public class ApiQuestion {
     private String acceptedAnsId;
     private Boolean isModerated;
 
-    public ApiQuestion(String questionBy,String content)
+
+    public ApiQuestion() {
+    }
+
+    public ApiQuestion(String questionBy, String content)
     {
         this.questionBy=questionBy;
         this.content=content;
@@ -47,11 +51,11 @@ public class ApiQuestion {
         this.questionBy = questionBy;
     }
 
-    public Date getPostedOn() {
+    public Long getPostedOn() {
         return postedOn;
     }
 
-    public void setPostedOn(Date postedOn) {
+    public void setPostedOn(Long postedOn) {
         this.postedOn = postedOn;
     }
 

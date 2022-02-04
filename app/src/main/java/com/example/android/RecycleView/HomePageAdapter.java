@@ -70,7 +70,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(position%2==0 && apiResponseList.size()>postsize)
+        if(position%2==0 && apiResponseList.size()>postsize )
         {
             ViewHolderOne viewHolder=(ViewHolderOne) holder;
             ApiQuestion apiHome = apiResponseList.get(postsize);
@@ -87,7 +87,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
         }
         else if (apiAdvertiseList.size() >adsize){
-            EmptyViewHolder emptyViewHolder=(EmptyViewHolder) holder;
+           EmptyViewHolder emptyViewHolder=(EmptyViewHolder) holder;
             ApiAdvertise apiAdvertise = apiAdvertiseList.get(adsize);
 //            Glide.with(((EmptyViewHolder) holder).advertiseimg.getContext()).load(apiAdvertise.getImage()).placeholder(R.drawable.ic_login).into(((EmptyViewHolder) holder).advertiseimg);
 //            RequestOptions options = new RequestOptions().dontTransform()

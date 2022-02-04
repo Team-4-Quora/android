@@ -58,6 +58,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
 
         ans_text=findViewById(R.id.et_ans);
         AnswerDto answerDto=new AnswerDto();
+        answerDto.setMessage("hello");
         answerDto.setMessage(ans_text.getText().toString());
         Call<Void> ansresponse=iPostQna.saveans(answerDto);
 
@@ -80,7 +81,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
         List<ApiAnswer> userDataList=new ArrayList<>();
         generatedata(userDataList);
         RecyclerView recyclerView=findViewById(R.id.recycleans);
-        AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this);
+        AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,Answer.this);
         LinearLayoutManager VerticalLayout= new LinearLayoutManager(Answer.this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(VerticalLayout);
         recyclerView.setAdapter(recycleViewAdapter);
