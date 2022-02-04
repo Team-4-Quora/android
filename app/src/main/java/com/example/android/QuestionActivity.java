@@ -2,10 +2,14 @@ package com.example.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.android.Retorfit.IPostQna;
@@ -20,6 +24,8 @@ import retrofit2.Retrofit;
 public class QuestionActivity extends AppCompatActivity {
     Button ques;
     EditText ques_content;
+    String cate="";
+    String[] category={"Sports","Bollywood","Education","E-Commerce","LifeStyle"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +36,36 @@ public class QuestionActivity extends AppCompatActivity {
         ques.setOnClickListener(view -> {
             addquestion();
             ques_content.getText().clear();
+            Intent i= new Intent(QuestionActivity.this,HomePage.class);
+            startActivity(i);
+            finish();
         });
 
+        Spinner spino = findViewById(R.id.categories);
+
+
+        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, category);
+
+
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spino.setAdapter(ad);
+
+        spino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(getApplicationContext(),
+//                        category[position],
+//                        Toast.LENGTH_SHORT)
+//                        .show();
+                cate=category[position];
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     public void addquestion()
@@ -45,6 +79,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         questionDto.setQuestionBy("vinaymatta63@gmail.com");
         questionDto.setQues(ques_content.getText().toString());
+        questionDto.setCategory(cate + "");
 
         Call<Void> quesresponse=iPostQna.saveques(questionDto);
         quesresponse.enqueue(new Callback<Void>() {
