@@ -41,7 +41,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolderAns holder, int position) {
         ApiAnswer apiAnswer = apiResponseList.get(position);
         holder.ansName.setText(apiAnswer.getAnswerBy()+"");
-        holder.ans.setText(apiAnswer.getMeassage()+"");
+        holder.ans.setText(apiAnswer.getMessage()+"");
         holder.ansdate.setText(apiAnswer.getPostedOn()+"");
 
 

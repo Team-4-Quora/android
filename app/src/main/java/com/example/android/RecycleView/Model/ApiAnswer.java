@@ -29,12 +29,12 @@ public class ApiAnswer {
         this.id = id;
     }
 
-    public String getMeassage() {
+    public String getMessage() {
         return message;
     }
 
-    public void setMeassage(String meassage) {
-        this.message = meassage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getAnswerBy() {
