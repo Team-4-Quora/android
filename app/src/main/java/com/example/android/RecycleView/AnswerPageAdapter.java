@@ -24,6 +24,8 @@ import com.example.android.Retorfit.Model.ReactionDto;
 import com.example.android.Retorfit.RetrofitQnaBuilder;
 import com.google.gson.internal.$Gson$Preconditions;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -57,13 +59,22 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
         ApiAnswer apiAnswer = apiResponseList.get(position);
         holder.ansName.setText(apiAnswer.getAnswerBy()+"");
         holder.ans.setText(apiAnswer.getMessage()+"");
-        holder.ansdate.setText(apiAnswer.getPostedOn()+"");
+
+        if(apiAnswer.getPostedOn()!=null){
+            Date date = new Date(apiAnswer.getPostedOn()* 1000);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            holder.ansdate.setText(sdf.format(date)+"");}
+
+//        holder.ansdate.setText(apiAnswer.getPostedOn()+"");
 
         holder.upvote.setOnClickListener(v -> {
             Retrofit retrofit= RetrofitQnaBuilder.getInstance();
             IPostQna iPostQna=retrofit.create(IPostQna.class);
 
             ReactionDto reactionDto=new ReactionDto();
+            reactionDto.setLike(true);
+            reactionDto.setAnswerId(apiAnswer.getId());
+            reactionDto.setReactionBy("vpalak@gmail.com");
             Call<Void> reactionresponse=iPostQna.save(reactionDto);
             reactionresponse.enqueue(new Callback<Void>() {
                 @Override
@@ -85,6 +96,11 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
             IPostQna iPostQna=retrofit.create(IPostQna.class);
 
             ReactionDto reactionDto=new ReactionDto();
+            reactionDto.setLike(false);
+            reactionDto.setAnswerId(apiAnswer.getId());
+            System.out.println("Answer id:::::::: "+apiAnswer.getId());
+            reactionDto.setReactionBy("vpalak@gmail.com");
+
             Call<Void> reactionresponse=iPostQna.save(reactionDto);
             reactionresponse.enqueue(new Callback<Void>() {
                 @Override

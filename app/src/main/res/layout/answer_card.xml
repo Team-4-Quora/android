@@ -72,9 +72,10 @@
 
             <ImageButton
                 android:id="@+id/upvote"
-                android:layout_width="99dp"
-                android:layout_height="53dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="44dp"
+                android:layout_marginHorizontal="16dp"
                 android:backgroundTint="#5D001E"
                 android:src="@drawable/ic_arrow_up"
                 android:tint="@color/white"
@@ -85,10 +86,10 @@
 
             <ImageButton
                 android:id="@+id/downvote"
-                android:layout_width="99dp"
-                android:layout_height="53dp"
-                android:layout_marginStart="25dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="44dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="#5D001E"
                 android:src="@drawable/ic_arrow_downward"
                 android:tint="@color/white"
@@ -99,10 +100,10 @@
 
             <ImageButton
                 android:id="@+id/share_bn"
-                android:layout_width="99dp"
-                android:layout_height="53dp"
-                android:layout_marginStart="44dp"
-                android:layout_marginTop="48dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="44dp"
                 android:backgroundTint="#5D001E"
                 android:src="@drawable/ic_baseline_share_24"
                 android:tint="@color/white"
@@ -112,11 +113,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/answer" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/commentbutton"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="#5D001E"
                 android:text="See comments"
                 android:textAllCaps="false"

@@ -88,7 +88,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_mainprofile_name" />
 
         <TextView
-            android:id="@+id/tv_profile_name"
+            android:id="@+id/tv_profile_points"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
@@ -124,7 +124,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/tv_profile_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_points" />
 
         <TextView
             android:id="@+id/tv1_interest"
@@ -140,7 +140,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv1_level" />
 
         <TextView
-            android:id="@+id/tv_profile_points"
+            android:id="@+id/tv_profile_interest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"

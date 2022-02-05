@@ -20,7 +20,11 @@ import com.example.android.RecycleView.Model.ApiAdvertise;
 import com.example.android.RecycleView.Model.ApiHome;
 import com.example.android.RecycleView.Model.ApiQuestion;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG="RecyclerAdapter";
@@ -77,18 +81,24 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             postsize++;
             viewHolder.quesName.setText(apiHome.getQuestionBy());
             viewHolder.ques.setText(apiHome.getContent()+"");
-            viewHolder.quesdate.setText(apiHome.getPostedOn()+"");
+
+            if(apiHome.getPostedOn()!=null){
+            Date date = new Date(apiHome.getPostedOn()* 1000);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            viewHolder.quesdate.setText(sdf.format(date)+"");}
             viewHolder.viewmore.setOnClickListener(v -> {
                 Intent i=new Intent(context, Answer.class);
-              //  i.putExtra("QuestionId",apiHome.getId());
+                System.out.println("Die here::::"+apiHome.getId());
+               i.putExtra("QuestionId",apiHome.getId());
                 i.putExtra("QuesText",apiHome.getContent());
                 context.startActivity(i);
             });
             ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
         }
-        else if (apiAdvertiseList.size() >adsize){
-           EmptyViewHolder emptyViewHolder=(EmptyViewHolder) holder;
+        else if (apiAdvertiseList.size() >adsize && position%2!=0){
+//           EmptyViewHolder emptyViewHolder=(EmptyViewHolder) holder;
             ApiAdvertise apiAdvertise = apiAdvertiseList.get(adsize);
+            adsize++;
 //            Glide.with(((EmptyViewHolder) holder).advertiseimg.getContext()).load(apiAdvertise.getImage()).placeholder(R.drawable.ic_login).into(((EmptyViewHolder) holder).advertiseimg);
 //            RequestOptions options = new RequestOptions().dontTransform()
 //                    .diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(placeholder);
