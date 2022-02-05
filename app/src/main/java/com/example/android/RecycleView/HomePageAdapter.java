@@ -20,7 +20,11 @@ import com.example.android.RecycleView.Model.ApiAdvertise;
 import com.example.android.RecycleView.Model.ApiHome;
 import com.example.android.RecycleView.Model.ApiQuestion;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG="RecyclerAdapter";
@@ -77,7 +81,11 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             postsize++;
             viewHolder.quesName.setText(apiHome.getQuestionBy());
             viewHolder.ques.setText(apiHome.getContent()+"");
-            viewHolder.quesdate.setText(apiHome.getPostedOn()+"");
+
+            if(apiHome.getPostedOn()!=null){
+            Date date = new Date(apiHome.getPostedOn()* 1000);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            viewHolder.quesdate.setText(sdf.format(date)+"");}
             viewHolder.viewmore.setOnClickListener(v -> {
                 Intent i=new Intent(context, Answer.class);
               //  i.putExtra("QuestionId",apiHome.getId());
