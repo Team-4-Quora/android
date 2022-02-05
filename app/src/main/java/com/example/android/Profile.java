@@ -65,6 +65,25 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     public void displayRecyclerfollower() {
         List<ApiFollowers> userDataList = new ArrayList<>();
         generatedata(userDataList);
+
+//        Retrofit retrofit= RetrofitUserBuilder.getInstance();
+//        IPostUser iPostUser=retrofit.create(IPostUser.class);
+//        Call<UserDto> userDtoCall=iPostUser.getUserStats("fggjh@gmail.com");
+//
+//        userDtoCall.enqueue(new Callback<UserDto>() {
+//            @Override
+//            public void onResponse(Call<UserDto> call, Response<UserDto> response) {
+//                userDataList=response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserDto> call, Throwable t) {
+//
+//            }
+//        });
+
+
+
         RecyclerView recyclerView = findViewById(R.id.recycleList);
         FollowerAdapter recycleViewAdapter = new FollowerAdapter(userDataList, Profile.this);
         LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);

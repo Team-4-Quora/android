@@ -124,7 +124,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
         Retrofit retrofit= RetrofitQnaBuilder.getInstance();
         IPostQna iPostQna=retrofit.create(IPostQna.class);
-        Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category","LifeStyle");
+        Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category",cate+"");
 
         feedQues.enqueue(new Callback<List<QuestionDto>>() {
             @Override

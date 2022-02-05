@@ -137,6 +137,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/answer" />
 
 
+            <TextView
+                android:id="@+id/upvote_count"
+                android:layout_width="42dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/upvote"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/downvote_count"
+                android:layout_width="42dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="8dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/downvote"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.144"
+                app:layout_constraintStart_toStartOf="@id/upvote_count" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
