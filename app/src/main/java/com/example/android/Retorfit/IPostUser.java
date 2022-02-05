@@ -1,5 +1,6 @@
 package com.example.android.Retorfit;
 
+import com.example.android.Retorfit.Model.FollowerDto;
 import com.example.android.Retorfit.Model.UserDto;
 
 import java.util.List;
@@ -13,7 +14,6 @@ public interface IPostUser {
     Call<UserDto> getUserStats(@Path(value = "email") String email);
 
 
-    @GET("people/fetch/{email}")
-    Call<List<UserDto>> getUsersList(@Path(value= "email") String email);
-
+    @GET("follower/fetch/{type}/{id}")
+    Call<List<FollowerDto>> fetchFollowerData(@Path(value = "type") String type, @Path(value = "id") String id);
 }
