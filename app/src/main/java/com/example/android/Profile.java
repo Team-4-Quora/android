@@ -39,6 +39,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
        level=findViewById(R.id.tv_profile_level);
        interest=findViewById(R.id.tv_profile_interest);
 
+       findViewById(R.id.iv_org)
        displaydetails();
         displayRecyclerfollower();
 

@@ -66,7 +66,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //    }
     @Override
     public int getItemViewType(int position) {
-        if(position%2==0){
+
+        if(position%2==0 && position<getItemCount()-1){
             return 0;
         }
         return 1;
@@ -88,7 +89,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(position%2==0 && apiResponseList.size()>postsize )
+        if(position%2==0 && apiResponseList.size()> postsize )
         {
             ViewHolderOne viewHolder=(ViewHolderOne) holder;
             ApiQuestion apiHome = apiResponseList.get(postsize);
@@ -134,13 +135,13 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.viewmore.setOnClickListener(v -> {
                 Intent i=new Intent(context, Answer.class);
                 System.out.println("Die here::::"+apiHome.getId());
-               i.putExtra("QuestionId",apiHome.getId());
+                i.putExtra("QuestionId",apiHome.getId());
                 i.putExtra("QuesText",apiHome.getContent());
                 context.startActivity(i);
             });
             ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
         }
-        else if (apiAdvertiseList.size() >adsize && position%2!=0){
+        else if (apiAdvertiseList.size() > adsize && position%2!=0){
 //           EmptyViewHolder emptyViewHolder=(EmptyViewHolder) holder;
             ApiAdvertise apiAdvertise = apiAdvertiseList.get(adsize);
             adsize++;
@@ -151,6 +152,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((EmptyViewHolder) holder).rootView2.setOnClickListener(v ->
                     iAddRespClick.onUserClickadd(apiAdvertise));
         }
+
     }
 
     @Override

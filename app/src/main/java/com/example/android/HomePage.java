@@ -168,6 +168,10 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
     private void generateads(List<ApiAdvertise> apiAdvertises)
     {
         apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
+        apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
+        apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
+        apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
+
     }
 
     @Override

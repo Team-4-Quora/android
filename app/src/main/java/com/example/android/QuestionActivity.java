@@ -56,7 +56,6 @@ public class QuestionActivity extends AppCompatActivity {
 //                        Toast.LENGTH_SHORT)
 //                        .show();
                 cate=category[position];
-
             }
 
             @Override
