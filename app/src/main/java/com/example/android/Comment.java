@@ -38,10 +38,10 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
         apiComments.add(new ApiComment("Hello everyone","Anush"));
         apiComments.add(new ApiComment("Project kardo","Anush"));
         apiComments.add(new ApiComment("Byee","Saurav"));
-
     }
 
     @Override
     public void onUserClick(ApiComment apiproduct) {
+
     }
 }

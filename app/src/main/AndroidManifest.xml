@@ -13,11 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Comment"></activity>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".Category" />
+        <activity android:name=".Signup" />
+        <activity android:name=".Comment" />
         <activity android:name=".Answer" />
         <activity android:name=".Profile" />
-        <activity android:name=".HomePage"/>
-        <activity android:name=".SplashScreen" >
+        <activity android:name=".HomePage" />
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

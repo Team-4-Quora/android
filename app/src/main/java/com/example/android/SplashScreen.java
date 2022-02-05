@@ -21,7 +21,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i=new Intent(SplashScreen.this, HomePage.class);
+                Intent i=new Intent(SplashScreen.this, Signup.class);
                 //Intent is used to switch from one activity to another.
                 startActivity(i);
                 //invoke the SecondActivity.

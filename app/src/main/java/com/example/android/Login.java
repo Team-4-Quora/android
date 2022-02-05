@@ -1,0 +1,193 @@
+package com.example.android;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.android.Retorfit.Model.AuthDto;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+public class Login extends AppCompatActivity {
+
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_login);
+//        Button button = findViewById(R.id.bn_login);
+//        button.setOnClickListener(v -> {
+//            Intent i = new Intent(Login.this, HomePage.class);
+//            startActivity(i);
+//        });
+//    }
+GoogleSignInClient mGoogleSignInClient;
+    private static int RC_SIGN_IN = 100;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        findViewById(R.id.bn_login_signup).setOnClickListener(v -> {
+            Intent intent=new Intent(Login.this,Signup.class);
+            startActivity(intent);
+            finish();
+
+        });
+        findViewById(R.id.bn_login).setOnClickListener(view -> {
+            boolean isAllFieldChecked=CheckAllFields();
+            if(isAllFieldChecked) {
+                //initApi(generateRequest());
+                //  Intent i;
+//                    if (flag == 1) {
+
+//                    } else {
+                //Toast.makeText(this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
+//                    }
+                Intent k = new Intent(Login.this, HomePage.class);
+                startActivity(k);
+                finish();
+            }
+
+        });
+
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        // Set the dimensions of the sign-in button.
+        Button button = findViewById(R.id.sign_in_button);
+        //button.setSize(SignInButton.SIZE_STANDARD);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        button.setOnClickListener(v -> {
+            signIn();
+        });
+
+    }
+    //    @Override
+//    public void onClick(View v) {
+//         signIn();
+//        }
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+            if (acct != null) {
+
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String personEmail = acct.getEmail();
+                String personId = acct.getId();
+                Uri personPhoto = acct.getPhotoUrl();
+                Toast.makeText(this , "User Email : " + personEmail , Toast.LENGTH_SHORT).show();
+            }
+            //initApi(generateRequest());
+            startActivity(new Intent(this , HomePage.class));
+            // Signed in successfully, show authenticated UI.
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.d("Message", e.toString());
+
+        }
+    }
+    public  AuthDto generateRequest()
+    {
+
+        EditText etemail= findViewById(R.id.login_email);
+        EditText etpass = findViewById(R.id.login_password);
+
+        AuthDto authDto=new AuthDto();
+        authDto.setUsername(etemail.getText().toString());
+        authDto.setPassword(etpass.getText().toString());
+        System.out.println(authDto.getUsername());
+        return authDto;
+
+    }
+    private boolean CheckAllFields() {
+        EditText etEmail = findViewById(R.id.login_email);
+        EditText etPassword = findViewById(R.id.login_password);
+
+        if (etPassword.length() == 0) {
+            etPassword.setError("This field is required");
+            return false;
+        }
+
+        if (etEmail.length() == 0) {
+            etEmail.setError("Email is required");
+            return false;
+        }
+        return true;
+    }
+
+//    private void initApi(AuthDto authDto)
+//    {
+//        Retrofit retrofit= UserRetrofitBuilder.getInstance();
+//        IPostUserApi iPostUserApi=retrofit.create(IPostUserApi.class);
+//        Call<ResponseDto> response=iPostUserApi.generateToken(authDto);
+//        SharedPreferences sharedPreferences = getSharedPreferences("com.example.medsavvy", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        response.enqueue(new Callback<ResponseDto>() {
+//            @Override
+//            public void onResponse(Call<ResponseDto> call, Response<ResponseDto> response) {
+//                Toast.makeText(Login.this,"Success",Toast.LENGTH_SHORT).show();
+//                editor.putBoolean("login",true);
+//                editor.putString("points", response.body().getPoints().toString());
+//                editor.putString("name", response.body().getName());
+//                editor.putString("em", response.body().getEmail());
+//                editor.putString("userId", response.body().getId());
+//
+//                editor.apply();
+////                Intent i = new Intent(Login.this, HomePage.class);
+////                startActivity(i);
+//                System.out.println(response);
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseDto> call, Throwable t) {
+//                Toast.makeText(Login.this,"Failure",Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//    }
+}

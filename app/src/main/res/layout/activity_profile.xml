@@ -15,7 +15,6 @@
         tools:context=".QuestionActivity"
         android:background="#E3E2DF">
 
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"

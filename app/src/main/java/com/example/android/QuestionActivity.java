@@ -42,7 +42,6 @@ public class QuestionActivity extends AppCompatActivity {
 
         Spinner spino = findViewById(R.id.categories);
 
-
         ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, category);
 
 
