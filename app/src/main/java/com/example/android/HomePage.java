@@ -78,7 +78,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
         });
 
-        displayRecycle(cate);
+       // displayRecycle(cate);
 
     }
 

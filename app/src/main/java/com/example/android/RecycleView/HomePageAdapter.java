@@ -41,17 +41,19 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final List<ApiQuestion> apiResponseList;
     private final List<ApiAdvertise> apiAdvertiseList;
     private final IApiResponseClick mUserDataInterface;
-    private static Integer postsize=0;
-    private static Integer adsize=0;
+//    private final static Integer postsize;
+//    private final static Integer adsize;
     private final IAddRespClick iAddRespClick;
     private Context context;
 
-    public HomePageAdapter(List<ApiQuestion> apiResponseList, List<ApiAdvertise> apiAdvertiseList, IApiResponseClick mUserDataInterface, IAddRespClick iAddRespClick, Context context) {
+    public HomePageAdapter(List<ApiQuestion> apiResponseList, List<ApiAdvertise> apiAdvertiseList, IApiResponseClick mUserDataInterface, IAddRespClick iAddRespClick, Context context)
+    {
         this.apiResponseList = apiResponseList;
         this.apiAdvertiseList = apiAdvertiseList;
         this.mUserDataInterface = mUserDataInterface;
         this.iAddRespClick = iAddRespClick;
         this.context = context;
+
     }
 
     //    public HomePageAdapter(List<ApiHome> apiResponseList, List<ApiAdvertise> apiAdvertiseList, IApiResponseClick mUserDataInterface, Context context) {
