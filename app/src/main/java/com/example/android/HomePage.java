@@ -78,7 +78,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
         });
 
-        displayRecycle(cate);
+       // displayRecycle(cate);
 
     }
 
@@ -103,7 +103,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
     private void generatedata(List<ApiQuestion> apiQuestions) {
 
-        apiQuestions.add(new ApiQuestion("Palak", "what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?what is your fav colour?"));
+        apiQuestions.add(new ApiQuestion("Palak", "what is your fav colour?"));
         apiQuestions.add(new ApiQuestion("Palak1", "what is your fav colour?"));
         apiQuestions.add(new ApiQuestion("Palak2", "what is your fav colour?"));
 
@@ -124,7 +124,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
         Retrofit retrofit= RetrofitQnaBuilder.getInstance();
         IPostQna iPostQna=retrofit.create(IPostQna.class);
-        Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category","LifeStyle");
+        Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category",cate+"");
 
         feedQues.enqueue(new Callback<List<QuestionDto>>() {
             @Override
@@ -157,7 +157,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
             @Override
             public void onFailure(Call<List<QuestionDto>> call, Throwable t) {
-                Toast.makeText(HomePage.this,"Fail get ques",Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomePage.this,t.getMessage(),Toast.LENGTH_SHORT).show();
 
                 System.out.println(t.getMessage() + "Error here");
             }

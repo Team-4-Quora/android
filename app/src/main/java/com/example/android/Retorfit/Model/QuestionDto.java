@@ -9,7 +9,6 @@ public class QuestionDto {
     private String shareableLink;
     private Boolean isThreadClosed=false;
     private String category;
-    private String acceptedAnswer;
     private Boolean isModerated=false;
 
     public String getText() {
@@ -74,14 +73,6 @@ public class QuestionDto {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getAcceptedAnswer() {
-        return acceptedAnswer;
-    }
-
-    public void setAcceptedAnswer(String acceptedAnswer) {
-        this.acceptedAnswer = acceptedAnswer;
     }
 
     public Boolean getModerated() {

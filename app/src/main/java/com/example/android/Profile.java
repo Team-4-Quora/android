@@ -32,8 +32,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        Intent i=new Intent();
-        i.getStringExtra("j");
+        j=getIntent().getIntExtra("j",0);
         displayRecyclerfollower();
 
        points=findViewById(R.id.tv_profile_points);
@@ -46,7 +45,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     private void displaydetails(){
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<UserDto> userDtoCall=iPostUser.getUserStats("fggjh@gmail.com");
+        Call<UserDto> userDtoCall=iPostUser.getUserStats("vinaymatta63@gmail.com");
         userDtoCall.enqueue(new Callback<UserDto>() {
             @Override
             public void onResponse(Call<UserDto> call, Response<UserDto> response) {
@@ -58,6 +57,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
             @Override
             public void onFailure(Call<UserDto> call, Throwable t) {
                 Toast.makeText(Profile.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                System.out.println(t.getMessage());
 
             }
         });
@@ -66,6 +66,32 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     public void displayRecyclerfollower() {
         List<ApiFollowers> userDataList = new ArrayList<>();
         generatedata(userDataList);
+//
+//        Retrofit retrofit= RetrofitUserBuilder.getInstance();
+//        IPostUser iPostUser=retrofit.create(IPostUser.class);
+//        Call<UserDto> userDtoCall=iPostUser.getUserStats("palak@gmail.com");
+//
+//        userDtoCall.enqueue(new Callback<UserDto>() {
+//            @Override
+//            public void onResponse(Call<UserDto> call, Response<UserDto> response) {
+//                List<ApiFollowers> userDataList = new ArrayList<>();
+//                userDataList=response.body();
+//
+//                RecyclerView recyclerView = findViewById(R.id.recycleList);
+//                FollowerAdapter recycleViewAdapter = new FollowerAdapter(userDataList, Profile.this);
+//                LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
+//                recyclerView.setLayoutManager(HorizontalLayout);
+//                recyclerView.setAdapter(recycleViewAdapter);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<UserDto> call, Throwable t) {
+//
+//            }
+//        });
+
+
+
         RecyclerView recyclerView = findViewById(R.id.recycleList);
         FollowerAdapter recycleViewAdapter = new FollowerAdapter(userDataList, Profile.this);
         LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
@@ -82,7 +108,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     public void onUserClick(ApiFollowers apiproduct) {
         if(j<=2) {
             Intent i = new Intent(Profile.this, Profile.class);
-            i.putExtra("j",j+=1);
+            i.putExtra("j",j+1);
             Toast.makeText(Profile.this,j+"",Toast.LENGTH_SHORT).show();
             startActivity(i);
         }

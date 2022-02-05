@@ -2,12 +2,14 @@ package com.example.android.RecycleView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,8 @@ import com.example.android.Retorfit.Model.ReactionDto;
 import com.example.android.Retorfit.RetrofitQnaBuilder;
 import com.google.gson.internal.$Gson$Preconditions;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -36,15 +40,17 @@ import retrofit2.Retrofit;
 public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.ViewHolderAns>{
     private final List<ApiAnswer> apiResponseList;
     private final IApiResponseClick mUserDataInterface;
-
+    private final Boolean b;
     private final Context context ;
-    public AnswerPageAdapter(List<ApiAnswer> apiResponseList, IApiResponseClick iApiResponseClick ,Context context) {
+    int like=0,dislike=0;
 
+
+    public AnswerPageAdapter(List<ApiAnswer> apiResponseList, IApiResponseClick mUserDataInterface, Boolean b, Context context) {
         this.apiResponseList = apiResponseList;
-        this.mUserDataInterface = iApiResponseClick;
-        this.context=context;
+        this.mUserDataInterface = mUserDataInterface;
+        this.b = false;
+        this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -67,6 +73,33 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
 
 //        holder.ansdate.setText(apiAnswer.getPostedOn()+"");
 
+        Retrofit retrofit1= RetrofitQnaBuilder.getInstance();
+        IPostQna iPostQna1=retrofit1.create(IPostQna.class);
+        Call<List<ReactionDto>> responsereact=iPostQna1.fetchByValue("answer",apiAnswer.getId());
+        responsereact.enqueue(new Callback<List<ReactionDto>>() {
+            @Override
+            public void onResponse(Call<List<ReactionDto>> call, Response<List<ReactionDto>> response) {
+                List<ReactionDto> react=response.body();
+
+                for(int i=0;i<react.size();i++)
+                {
+                    if(react.get(i).getLike()==true && react.get(i)!=null)
+                        like=like+1;
+                    else
+                        dislike=dislike+1;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ReactionDto>> call, Throwable t) {
+
+            }
+        });
+
+//        holder.upcount.setText(like+"");
+//        holder.downcount.setText(dislike+"");
+
+
         holder.upvote.setOnClickListener(v -> {
             Retrofit retrofit= RetrofitQnaBuilder.getInstance();
             IPostQna iPostQna=retrofit.create(IPostQna.class);
@@ -80,6 +113,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(context,"Liked",Toast.LENGTH_SHORT).show();
+                 holder.upcount.setText(like+"");
                 }
 
                 @Override
@@ -106,6 +140,8 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(context,"Dislike",Toast.LENGTH_SHORT).show();
+                    holder.downcount.setText(dislike+"");
+
                 }
 
                 @Override
@@ -114,6 +150,28 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
 
                 }
             });
+        });
+        holder.answer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Retrofit retrofit=RetrofitQnaBuilder.getInstance();
+                IPostQna iPostQna=retrofit.create(IPostQna.class);
+                Call<Void> acceptanswer=iPostQna.setAcceptedAnswer(apiAnswer.getId());
+                System.out.println("Check this: answer here"+apiAnswer.getId());
+
+                acceptanswer.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(context,"Accepted answer set",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(context,"Answer cannot be set",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
         });
 
 
@@ -138,6 +196,8 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
 
     public interface IApiResponseClick {
         void onUserClick(ApiAnswer apiAnswer);
+        Boolean b =false;
+
     }
 
     public static class ViewHolderAns extends RecyclerView.ViewHolder {
@@ -150,6 +210,9 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
         private final ImageButton downvote;
         private final ImageButton share;
         private final Button  comment;
+        private final Button answer;
+        private  final TextView upcount;
+        private final TextView downcount;
 
 
 
@@ -164,6 +227,9 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
             upvote=view.findViewById(R.id.upvote);
             downvote=view.findViewById(R.id.downvote);
             comment=view.findViewById(R.id.commentbutton);
+            answer=view.findViewById(R.id.acceptAnswer);
+            upcount=view.findViewById(R.id.upvote_count);
+            downcount=view.findViewById(R.id.downvote_count);
 
         }
     }
