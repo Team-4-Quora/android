@@ -1,6 +1,6 @@
 package com.example.android.Retorfit.Model;
 
-public class ReactionDto {
+public class  ReactionDto {
     private String id;
     private String questionId;
     private String reactionBy;

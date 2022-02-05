@@ -140,6 +140,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
                     apiQuestion.setPostedOn(questionDto.get(i).getPostedOn());
                     apiQuestion.setContent(questionDto.get(i).getText());
                     apiQuestion.setCategory(questionDto.get(i).getCategory());
+                    apiQuestion.setId(questionDto.get(i).getId());
                     System.out.println(apiQuestion.getContent()+"Question here");
                     userDataList.add(apiQuestion);
                 }
@@ -162,50 +163,8 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
             }
         });
 
-
-
-        //render recycle view
-
 }
-//    private void generateRetrodata(List<ApiQuestion> apiQuestions)
-//    {
-//        Retrofit retrofit= RetrofitQnaBuilder.getInstance();
-//        IPostQna iPostQna=retrofit.create(IPostQna.class);
-//        Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category","LifeStyle");
-//
-//        feedQues.enqueue(new Callback<List<QuestionDto>>() {
-//            @Override
-//            public void onResponse(Call<List<QuestionDto>> call, Response<List<QuestionDto>> response) {
-//                List<QuestionDto> questionDto=response.body();
-//                System.out.println("I am herre");
-//               // System.out.println(response.body().get(0).getText());
-//
-//                for(int i=0;i<questionDto.size();i++)
-//                {
-//                    ApiQuestion apiQuestion=new ApiQuestion();
-//                    apiQuestion.setQuestionBy(questionDto.get(i).getQuestionBy());
-//                    apiQuestion.setPostedOn(questionDto.get(i).getPostedOn());
-//                    apiQuestion.setContent(questionDto.get(i).getText());
-//                    apiQuestion.setCategory(questionDto.get(i).getCategory());
-//                    System.out.println(apiQuestion.getContent()+"Question here");
-//                    apiQuestions.add(apiQuestion);
-//                }
-//
-//                Toast.makeText(HomePage.this,"Success get ques",Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<QuestionDto>> call, Throwable t) {
-//                Toast.makeText(HomePage.this,"Fail get ques",Toast.LENGTH_SHORT).show();
-//
-//                System.out.println(t.getMessage() + "Error here");
-//            }
-//        });
-//
-//
-//
-//    }
+
     private void generateads(List<ApiAdvertise> apiAdvertises)
     {
         apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));

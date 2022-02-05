@@ -88,7 +88,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.quesdate.setText(sdf.format(date)+"");}
             viewHolder.viewmore.setOnClickListener(v -> {
                 Intent i=new Intent(context, Answer.class);
-              //  i.putExtra("QuestionId",apiHome.getId());
+                System.out.println("Die here::::"+apiHome.getId());
+               i.putExtra("QuestionId",apiHome.getId());
                 i.putExtra("QuesText",apiHome.getContent());
                 context.startActivity(i);
             });

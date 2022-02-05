@@ -7,7 +7,7 @@ public class ApiAnswer {
     private String id;
     private String message;
     private String answerBy;
-    private Date postedOn;
+    private Long postedOn;
     private String questionId;
     private String parentId;
     private Boolean isAccepted;
@@ -15,7 +15,10 @@ public class ApiAnswer {
     private String acceptedAnsId;
     private Boolean isModerated;
 
-    public ApiAnswer(String answerBy,String message)
+    public ApiAnswer() {
+    }
+
+    public ApiAnswer(String answerBy, String message)
     {
         this.answerBy=answerBy;
         this.message=message;
@@ -45,11 +48,11 @@ public class ApiAnswer {
         this.answerBy = answerBy;
     }
 
-    public Date getPostedOn() {
+    public Long getPostedOn() {
         return postedOn;
     }
 
-    public void setPostedOn(Date postedOn) {
+    public void setPostedOn(Long postedOn) {
         this.postedOn = postedOn;
     }
 

@@ -18,6 +18,7 @@ import com.example.android.RecycleView.Model.ApiQuestion;
 import com.example.android.Retorfit.IPostQna;
 import com.example.android.Retorfit.Model.AnswerDto;
 import com.example.android.Retorfit.RetrofitQnaBuilder;
+import com.example.android.Retorfit.RetrofitUserBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +33,17 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
     EditText ans_text;
     Button post_ans;
     Intent i;
+    String quesId,quesText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
         i=getIntent();
-        String quesText=i.getExtras().getString("QuesText");
-//        String quesId=i.getExtras().getString("QuestionId");
+        quesText=i.getExtras().getString("QuesText");
+        quesId=i.getExtras().getString("QuestionId");
+
+        System.out.println("Question Id Here::::::"+quesId);
 
         TextView ques_text=findViewById(R.id.tv_curr_ques);
         ques_text.setText(quesText);
@@ -58,7 +62,8 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
 
         ans_text=findViewById(R.id.et_ans);
         AnswerDto answerDto=new AnswerDto();
-        answerDto.setMessage("hello");
+        answerDto.setAnswerBy("vpalak@gmail.com");
+        answerDto.setQuestionId(quesId);
         answerDto.setMessage(ans_text.getText().toString());
         Call<Void> ansresponse=iPostQna.saveans(answerDto);
 
@@ -79,12 +84,42 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
 
     public void displayRecycle(){
         List<ApiAnswer> userDataList=new ArrayList<>();
-        generatedata(userDataList);
-        RecyclerView recyclerView=findViewById(R.id.recycleans);
-        AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,Answer.this);
-        LinearLayoutManager VerticalLayout= new LinearLayoutManager(Answer.this,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(VerticalLayout);
-        recyclerView.setAdapter(recycleViewAdapter);
+     //   generatedata(userDataList);
+
+        Retrofit retrofit= RetrofitQnaBuilder.getInstance();
+        IPostQna iPostQna=retrofit.create(IPostQna.class);
+        Call<List<AnswerDto>> answerlist=iPostQna.fetchByQuestionId(quesId);
+        answerlist.enqueue(new Callback<List<AnswerDto>>() {
+            @Override
+            public void onResponse(Call<List<AnswerDto>> call, Response<List<AnswerDto>> response) {
+                List<AnswerDto> temp=response.body();
+
+                for(int i=0;i<temp.size();i++)
+                {
+                    ApiAnswer answerDto=new ApiAnswer();
+                    answerDto.setMessage(temp.get(i).getMessage());
+                    answerDto.setAnswerBy(temp.get(i).getAnswerBy());
+                    answerDto.setPostedOn(temp.get(i).getPostedOn());
+                    answerDto.setQuestionId(quesId);
+
+                    userDataList.add(answerDto);
+
+
+                    RecyclerView recyclerView=findViewById(R.id.recycleans);
+                    AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,Answer.this);
+                    LinearLayoutManager VerticalLayout= new LinearLayoutManager(Answer.this,LinearLayoutManager.VERTICAL,false);
+                    recyclerView.setLayoutManager(VerticalLayout);
+                    recyclerView.setAdapter(recycleViewAdapter);
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AnswerDto>> call, Throwable t) {
+
+            }
+        });
 
     }
 
