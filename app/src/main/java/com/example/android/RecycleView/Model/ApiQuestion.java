@@ -13,7 +13,6 @@ public class ApiQuestion {
     private String shareableLink;
     private Boolean threadClosed;
     private String category;
-    private String acceptedAnsId;
     private Boolean isModerated;
 
 
@@ -89,14 +88,6 @@ public class ApiQuestion {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getAcceptedAnsId() {
-        return acceptedAnsId;
-    }
-
-    public void setAcceptedAnsId(String acceptedAnsId) {
-        this.acceptedAnsId = acceptedAnsId;
     }
 
     public Boolean getModerated() {

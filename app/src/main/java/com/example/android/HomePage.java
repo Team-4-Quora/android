@@ -157,7 +157,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
             @Override
             public void onFailure(Call<List<QuestionDto>> call, Throwable t) {
-                Toast.makeText(HomePage.this,"Fail get ques",Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomePage.this,t.getMessage(),Toast.LENGTH_SHORT).show();
 
                 System.out.println(t.getMessage() + "Error here");
             }

@@ -4,7 +4,7 @@ public class  ReactionDto {
     private String id;
     private String questionId;
     private String reactionBy;
-    private Boolean isLike;
+    private Boolean Like;
     private String answerId;
     private Long reactedOn;
 
@@ -34,11 +34,11 @@ public class  ReactionDto {
     }
 
     public Boolean getLike() {
-        return isLike;
+        return Like;
     }
 
     public void setLike(Boolean like) {
-        isLike = like;
+        Like = like;
     }
 
     public String getAnswerId() {

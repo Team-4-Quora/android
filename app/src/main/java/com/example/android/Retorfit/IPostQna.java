@@ -34,4 +34,7 @@ public interface IPostQna {
         @POST("qna/answer/accepted/{ansId}")
         Call<Void> setAcceptedAnswer(@Path(value = "ansId")String ansId);
 
+        @GET("qna/answer/fetch/accepted/{queId}")
+        Call<AnswerDto> getAcceptedAnswer(@Path(value = "queId") String queId);
+
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +21,20 @@ import com.example.android.R;
 import com.example.android.RecycleView.Model.ApiAdvertise;
 import com.example.android.RecycleView.Model.ApiHome;
 import com.example.android.RecycleView.Model.ApiQuestion;
+import com.example.android.Retorfit.IPostQna;
+import com.example.android.Retorfit.Model.AnswerDto;
+import com.example.android.Retorfit.RetrofitQnaBuilder;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG="RecyclerAdapter";
@@ -88,11 +97,36 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             viewHolder.quesdate.setText(sdf.format(date)+"");}
 
-            SharedPreferences sharedPreferences=context.getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
-            String strAnswer=sharedPreferences.getString("answer","answer display");
 
+            if(apiHome.getId()!=null) {
+                Retrofit retrofit = RetrofitQnaBuilder.getInstance();
+                IPostQna iPostQna = retrofit.create(IPostQna.class);
+                Call<AnswerDto> acceptedans = iPostQna.getAcceptedAnswer(apiHome.getId());
+                System.out.println("Accepted answer not displayed" + apiHome.getContent());
 
-            viewHolder.ans.setText(strAnswer);
+                acceptedans.enqueue(new Callback<AnswerDto>() {
+                    @Override
+                    public void onResponse(Call<AnswerDto> call, Response<AnswerDto> response) {
+                        viewHolder.ans.setText(response.body().getMessage());
+
+                        Date date = new Date(response.body().getPostedOn()* 1000);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        viewHolder.ansdate.setText(sdf.format(date)+"");
+                   //     viewHolder.ansdate.setText(response.body().getPostedOn() + "");
+                        viewHolder.ansName.setText(response.body().getAnswerBy() + "");
+
+                        Toast.makeText(context, "Accepted answer displayed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AnswerDto> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        System.out.println("Accepted view"+t.getMessage());
+
+                    }
+                });
+            }
+
             viewHolder.viewmore.setOnClickListener(v -> {
                 Intent i=new Intent(context, Answer.class);
                 System.out.println("Die here::::"+apiHome.getId());
@@ -135,6 +169,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private final TextView quesdate;
         private final TextView ques;
         private final TextView ans;
+        private final TextView ansName;
+        private final TextView ansdate;
 
         private final Button  viewmore;
 
@@ -149,6 +185,9 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             quesdate=view.findViewById(R.id.ques_time);
             viewmore=view.findViewById(R.id.bn_feed);
             ans=view.findViewById(R.id.feed_answer);
+            ansName=view.findViewById(R.id.feed_ans_name);
+            ansdate=view.findViewById(R.id.feed_ans_timestamp);
+
 
         }
     }
