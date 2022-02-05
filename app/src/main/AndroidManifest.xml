@@ -19,13 +19,15 @@
         <activity android:name=".Comment" />
         <activity android:name=".Answer" />
         <activity android:name=".Profile" />
-        <activity android:name=".HomePage" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".HomePage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".SplashScreen">
+
         </activity>
         <activity android:name=".QuestionActivity" />
         <activity android:name=".MainActivity" />

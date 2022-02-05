@@ -2,12 +2,14 @@ package com.example.android.RecycleView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,15 +38,15 @@ import retrofit2.Retrofit;
 public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.ViewHolderAns>{
     private final List<ApiAnswer> apiResponseList;
     private final IApiResponseClick mUserDataInterface;
-
+    private final Boolean b;
     private final Context context ;
-    public AnswerPageAdapter(List<ApiAnswer> apiResponseList, IApiResponseClick iApiResponseClick ,Context context) {
 
+    public AnswerPageAdapter(List<ApiAnswer> apiResponseList, IApiResponseClick mUserDataInterface, Boolean b, Context context) {
         this.apiResponseList = apiResponseList;
-        this.mUserDataInterface = iApiResponseClick;
-        this.context=context;
+        this.mUserDataInterface = mUserDataInterface;
+        this.b = false;
+        this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -115,7 +117,28 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                 }
             });
         });
+        holder.answer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Retrofit retrofit=RetrofitQnaBuilder.getInstance();
+                IPostQna iPostQna=retrofit.create(IPostQna.class);
+                Call<Void> acceptanswer=iPostQna.setAcceptedAnswer(apiAnswer.getId());
+                System.out.println("Check this: answer here"+apiAnswer.getId());
 
+                acceptanswer.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(context,"Accepted answer set",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(context,"Answer cannot be set",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
 
         //  Glide.with(holder.quesimg.getContext()).load(apiAnswer.getImage()).placeholder(R.drawable.ic_login).into(holder.quesimg);
         holder.comment.setOnClickListener(v -> {
@@ -138,6 +161,8 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
 
     public interface IApiResponseClick {
         void onUserClick(ApiAnswer apiAnswer);
+        Boolean b =false;
+
     }
 
     public static class ViewHolderAns extends RecyclerView.ViewHolder {
@@ -150,6 +175,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
         private final ImageButton downvote;
         private final ImageButton share;
         private final Button  comment;
+        private final Button answer;
 
 
 
@@ -164,6 +190,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
             upvote=view.findViewById(R.id.upvote);
             downvote=view.findViewById(R.id.downvote);
             comment=view.findViewById(R.id.commentbutton);
+            answer=view.findViewById(R.id.acceptAnswer);
 
         }
     }

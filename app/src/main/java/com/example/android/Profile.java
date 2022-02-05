@@ -32,8 +32,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        Intent i=new Intent();
-        i.getStringExtra("j");
+        j=getIntent().getIntExtra("j",0);
         displayRecyclerfollower();
 
        points=findViewById(R.id.tv_profile_points);
@@ -82,7 +81,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     public void onUserClick(ApiFollowers apiproduct) {
         if(j<=2) {
             Intent i = new Intent(Profile.this, Profile.class);
-            i.putExtra("j",j+=1);
+            i.putExtra("j",j+1);
             Toast.makeText(Profile.this,j+"",Toast.LENGTH_SHORT).show();
             startActivity(i);
         }

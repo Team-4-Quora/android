@@ -30,4 +30,8 @@ public interface IPostQna {
         @GET("qna/question/fetch/{type}/{value}")
         Call<List<QuestionDto>> fetchquesByValue(@Path(value = "type") String type, @Path(value="value") String value);
 
+
+        @POST("qna/answer/accepted/{ansId}")
+        Call<Void> setAcceptedAnswer(@Path(value = "ansId")String ansId);
+
 }

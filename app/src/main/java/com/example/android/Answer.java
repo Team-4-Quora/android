@@ -34,7 +34,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
     Button post_ans;
     Intent i;
     String quesId,quesText;
-
+  private Boolean b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +44,6 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
         quesId=i.getExtras().getString("QuestionId");
 
         System.out.println("Question Id Here::::::"+quesId);
-
         TextView ques_text=findViewById(R.id.tv_curr_ques);
         ques_text.setText(quesText);
         post_ans=findViewById(R.id.ans_post);
@@ -100,13 +99,14 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
                     answerDto.setMessage(temp.get(i).getMessage());
                     answerDto.setAnswerBy(temp.get(i).getAnswerBy());
                     answerDto.setPostedOn(temp.get(i).getPostedOn());
+                    answerDto.setId(temp.get(i).getId());
                     answerDto.setQuestionId(quesId);
 
                     userDataList.add(answerDto);
 
 
                     RecyclerView recyclerView=findViewById(R.id.recycleans);
-                    AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,Answer.this);
+                    AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,b,Answer.this);
                     LinearLayoutManager VerticalLayout= new LinearLayoutManager(Answer.this,LinearLayoutManager.VERTICAL,false);
                     recyclerView.setLayoutManager(VerticalLayout);
                     recyclerView.setAdapter(recycleViewAdapter);
@@ -133,6 +133,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
 
     @Override
     public void onUserClick(ApiAnswer apiproduct) {
+
     }
 
 }

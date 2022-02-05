@@ -2,6 +2,7 @@ package com.example.android.RecycleView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.text.method.ScrollingMovementMethod;
@@ -86,6 +87,12 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Date date = new Date(apiHome.getPostedOn()* 1000);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             viewHolder.quesdate.setText(sdf.format(date)+"");}
+
+            SharedPreferences sharedPreferences=context.getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
+            String strAnswer=sharedPreferences.getString("answer","answer display");
+
+
+            viewHolder.ans.setText(strAnswer);
             viewHolder.viewmore.setOnClickListener(v -> {
                 Intent i=new Intent(context, Answer.class);
                 System.out.println("Die here::::"+apiHome.getId());
@@ -127,6 +134,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private final ImageView quesimg;
         private final TextView quesdate;
         private final TextView ques;
+        private final TextView ans;
+
         private final Button  viewmore;
 
 
@@ -139,6 +148,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             quesimg=view.findViewById(R.id.ques_iv);
             quesdate=view.findViewById(R.id.ques_time);
             viewmore=view.findViewById(R.id.bn_feed);
+            ans=view.findViewById(R.id.feed_answer);
 
         }
     }
