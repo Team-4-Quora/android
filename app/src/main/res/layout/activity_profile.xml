@@ -40,12 +40,12 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <ImageView
+                android:id="@+id/iv_org_create"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_cart"
-                android:id="@+id/iv_home_cart"
+                android:layout_height="11dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:src="@drawable/ic_cart" />
 
             <ImageView
                 android:id="@+id/iv_logout"
