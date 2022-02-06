@@ -1,6 +1,7 @@
 package com.example.android.Retorfit;
 
 import com.example.android.Retorfit.Model.OrganisationDto;
+import com.example.android.Retorfit.Model.QuestionDto;
 import com.example.android.Retorfit.Model.UserDto;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface IPostSearch {
 
     @GET("user/searchuser/{query}")
     Call<List<UserDto>> searchUser(@Path("query") String query);
+
+    @GET("ques/searchques/{query}")
+    Call<List<QuestionDto>> searchQues(@Path("query") String query);
 }

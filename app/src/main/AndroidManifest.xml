@@ -13,10 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android"
         android:usesCleartextTraffic="true">
+<<<<<<< HEAD
         <activity android:name=".OrganizationView"></activity>
         <activity android:name=".ProfileSearchQuery" />
         <activity android:name=".Pending" />
         <activity android:name=".OrganizationCreate" />
+=======
+        <activity android:name=".HomeSearchQuery"></activity>
+        <activity android:name=".ProfileSearchQuery" />
+        <activity android:name=".Pending" />
+        <activity android:name=".Organization" />
+>>>>>>> 54ce3c9058a3eb3b742042a1ab956a71f64b8862
         <activity android:name=".Login" />
         <activity android:name=".Category" />
         <activity android:name=".Signup" />
@@ -24,13 +31,19 @@
         <activity android:name=".Answer" />
         <activity android:name=".Profile" />
         <activity android:name=".HomePage">
+
+        </activity>
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".SplashScreen" />
+=======
+>>>>>>> 54ce3c9058a3eb3b742042a1ab956a71f64b8862
         <activity android:name=".QuestionActivity" />
         <activity android:name=".MainActivity" />
     </application>

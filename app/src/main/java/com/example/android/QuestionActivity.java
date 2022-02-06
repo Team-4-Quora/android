@@ -2,7 +2,9 @@ package com.example.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -73,7 +75,9 @@ public class QuestionActivity extends AppCompatActivity {
         ques_content=findViewById(R.id.et_ques);
 
         QuestionDto questionDto=new QuestionDto();
-
+//
+//        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+//        String email=sharedPreferences.getString("em","");
         questionDto.setQuestionBy("vinaymatta63@gmail.com");
         questionDto.setText(ques_content.getText().toString());
         System.out.println("===="+questionDto.getText());
