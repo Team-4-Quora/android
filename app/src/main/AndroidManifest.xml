@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Pending"></activity>
+        <activity android:name=".HomeSearchQuery"></activity>
+        <activity android:name=".ProfileSearchQuery" />
+        <activity android:name=".Pending" />
         <activity android:name=".Organization" />
         <activity android:name=".Login" />
         <activity android:name=".Category" />
@@ -28,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen"></activity>
+        <activity android:name=".SplashScreen" />
         <activity android:name=".QuestionActivity" />
         <activity android:name=".MainActivity" />
     </application>

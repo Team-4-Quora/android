@@ -2,16 +2,12 @@ package com.example.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.Retorfit.IPostQna;
 import com.example.android.Retorfit.IPostUser;
-import com.example.android.Retorfit.Model.OrganizationDto;
-import com.example.android.Retorfit.Model.UserDto;
-import com.example.android.Retorfit.RetrofitQnaBuilder;
+import com.example.android.Retorfit.Model.OrganisationDto;
 import com.example.android.Retorfit.RetrofitUserBuilder;
 
 import retrofit2.Call;
@@ -40,10 +36,10 @@ public class Organization extends AppCompatActivity {
     {
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<OrganizationDto> organizationDtoCall=iPostUser.getAnOrganization("organization1");
-        organizationDtoCall.enqueue(new Callback<OrganizationDto>() {
+        Call<OrganisationDto> organizationDtoCall=iPostUser.getAnOrganization("organization1");
+        organizationDtoCall.enqueue(new Callback<OrganisationDto>() {
             @Override
-            public void onResponse(Call<OrganizationDto> call, Response<OrganizationDto> response) {
+            public void onResponse(Call<OrganisationDto> call, Response<OrganisationDto> response) {
                 orgemail.setText(response.body().getOwner()+"");
                 orgname.setText(response.body().getName()+"");
                 orgdesc.setText(response.body().getDescription()+"");
@@ -51,7 +47,7 @@ public class Organization extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<OrganizationDto> call, Throwable t) {
+            public void onFailure(Call<OrganisationDto> call, Throwable t) {
                 Toast.makeText(Organization.this,t.getMessage(),Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
 
@@ -63,12 +59,12 @@ public void newOrganization()
 {
     Retrofit retrofit= RetrofitUserBuilder.getInstance();
     IPostUser iPostUser=retrofit.create(IPostUser.class);
-    OrganizationDto organizationDto=new OrganizationDto();
-    organizationDto.setId(orgemail.getText().toString());
-    organizationDto.setName(orgname.getText().toString());
-    organizationDto.setDescription(orgdesc.getText().toString());
-    organizationDto.setOwner("vpalak106@gmail.com");
-    Call<Void> organizationCall=iPostUser.addOrg(organizationDto);
+    OrganisationDto organisationDto =new OrganisationDto();
+    organisationDto.setId(orgemail.getText().toString());
+    organisationDto.setName(orgname.getText().toString());
+    organisationDto.setDescription(orgdesc.getText().toString());
+    organisationDto.setOwner("vpalak106@gmail.com");
+    Call<Void> organizationCall=iPostUser.addOrg(organisationDto);
 
     organizationCall.enqueue(new Callback<Void>() {
         @Override

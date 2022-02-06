@@ -1,7 +1,7 @@
 package com.example.android.Retorfit;
 
 import com.example.android.Retorfit.Model.FollowerDto;
-import com.example.android.Retorfit.Model.OrganizationDto;
+import com.example.android.Retorfit.Model.OrganisationDto;
 import com.example.android.Retorfit.Model.UserDto;
 
 import java.util.List;
@@ -23,12 +23,12 @@ public interface IPostUser {
     Call<List<UserDto>> getUsersList(@Path(value= "email") String email);
 
     @GET("organizations/{id}")
-    Call<OrganizationDto> getAnOrganization(@Path(value = "id")String orgId);
+    Call<OrganisationDto> getAnOrganization(@Path(value = "id")String orgId);
 
     @GET("organizations/email/{id}")
-    Call<List<OrganizationDto>> fetchOrganization(@Path(value = "id")String Id);
+    Call<List<OrganisationDto>> fetchOrganization(@Path(value = "id")String Id);
 
     @POST("organizations/add")
-    Call<Void> addOrg(@Body OrganizationDto organizationDto);
+    Call<Void> addOrg(@Body OrganisationDto organisationDto);
 
 }

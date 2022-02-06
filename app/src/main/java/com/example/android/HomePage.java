@@ -1,6 +1,7 @@
 package com.example.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -79,6 +80,22 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
         });
 
        // displayRecycle(cate);
+        SearchView searchView;
+        searchView = findViewById(R.id.et_home_search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent i = new Intent(getApplicationContext(), HomeSearchQuery.class);
+                i.putExtra("searchQuery", query);
+                startActivity(i);
+                return  true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
     }
 

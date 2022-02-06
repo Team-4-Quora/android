@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +39,25 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
        points=findViewById(R.id.tv_profile_points);
        level=findViewById(R.id.tv_profile_level);
        interest=findViewById(R.id.tv_profile_interest);
+
+
+        SearchView searchView;
+        searchView = findViewById(R.id.et_profile_search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent i = new Intent(getApplicationContext(), ProfileSearchQuery.class);
+                i.putExtra("searchQuery", query);
+                startActivity(i);
+                return  true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //    adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
        findViewById(R.id.iv_org_create).setOnClickListener(v -> {
            Intent i=new Intent(Profile.this,Organization.class);
