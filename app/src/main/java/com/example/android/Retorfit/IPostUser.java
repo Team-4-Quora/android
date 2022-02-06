@@ -15,7 +15,6 @@ public interface IPostUser {
     @GET("user/stats/{email}")
     Call<UserDto> getUserStats(@Path(value = "email") String email);
 
-
     @GET("people/fetch/{email}")
     Call<List<UserDto>> getUsersList(@Path(value= "email") String email);
 

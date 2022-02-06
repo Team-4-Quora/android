@@ -13,23 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Organization"></activity>
+        <activity android:name=".Pending"></activity>
+        <activity android:name=".Organization" />
         <activity android:name=".Login" />
         <activity android:name=".Category" />
         <activity android:name=".Signup" />
         <activity android:name=".Comment" />
         <activity android:name=".Answer" />
         <activity android:name=".Profile" />
-        <activity android:name=".HomePage" >
+        <activity android:name=".HomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen">
-
-        </activity>
+        <activity android:name=".SplashScreen"></activity>
         <activity android:name=".QuestionActivity" />
         <activity android:name=".MainActivity" />
     </application>

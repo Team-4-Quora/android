@@ -30,7 +30,9 @@ public class Organization extends AppCompatActivity {
         orgname=findViewById(R.id.et_organization_name);
         orgdesc=findViewById(R.id.et_organization_description);
 
-        addOrganization();
+        findViewById(R.id.bn_organization_submit).setOnClickListener(v -> {
+            newOrganization();
+        });
     }
 
     public void addOrganization()

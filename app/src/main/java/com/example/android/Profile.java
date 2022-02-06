@@ -40,6 +40,10 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
        interest=findViewById(R.id.tv_profile_interest);
 
        displaydetails();
+       findViewById(R.id.iv_org_create).setOnClickListener(v -> {
+           Intent i=new Intent(Profile.this,Organization.class);
+           startActivity(i);
+       });
     }
 
     private void displaydetails(){
@@ -64,39 +68,42 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     }
 
     public void displayRecyclerfollower() {
-        List<ApiFollowers> userDataList = new ArrayList<>();
-        generatedata(userDataList);
+//        List<UserDto> userDataList = new ArrayList<>();
+        // generatedata(userDataList);
 //
-//        Retrofit retrofit= RetrofitUserBuilder.getInstance();
-//        IPostUser iPostUser=retrofit.create(IPostUser.class);
-//        Call<UserDto> userDtoCall=iPostUser.getUserStats("palak@gmail.com");
-//
-//        userDtoCall.enqueue(new Callback<UserDto>() {
-//            @Override
-//            public void onResponse(Call<UserDto> call, Response<UserDto> response) {
-//                List<ApiFollowers> userDataList = new ArrayList<>();
-//                userDataList=response.body();
-//
-//                RecyclerView recyclerView = findViewById(R.id.recycleList);
-//                FollowerAdapter recycleViewAdapter = new FollowerAdapter(userDataList, Profile.this);
-//                LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
-//                recyclerView.setLayoutManager(HorizontalLayout);
-//                recyclerView.setAdapter(recycleViewAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserDto> call, Throwable t) {
-//
-//            }
-//        });
+        Retrofit retrofit= RetrofitUserBuilder.getInstance();
+        IPostUser iPostUser=retrofit.create(IPostUser.class);
+        Call<List<FollowerDto>> userDtoCall=iPostUser.fetchFollowerData("followers","vmat358@gmail.com");
+        userDtoCall.enqueue(new Callback<List<FollowerDto>>() {
+            @Override
+            public void onResponse(Call<List<FollowerDto>> call, Response<List<FollowerDto>> response) {
+                List<ApiFollowers> userData=new ArrayList<>();
+                for(int i=0;i<response.body().size();i++)
+                {
+                    ApiFollowers followerDto=new ApiFollowers();
+                    followerDto.setEmail(response.body().get(i).getRequesterId());
+                    userData.add(followerDto);
+                }
 
+                RecyclerView recyclerView = findViewById(R.id.recycleList);
+                FollowerAdapter recycleViewAdapter = new FollowerAdapter(userData, Profile.this);
+                LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
+                recyclerView.setLayoutManager(HorizontalLayout);
+                recyclerView.setAdapter(recycleViewAdapter);
+            }
 
+            @Override
+            public void onFailure(Call<List<FollowerDto>> call, Throwable t) {
 
-        RecyclerView recyclerView = findViewById(R.id.recycleList);
-        FollowerAdapter recycleViewAdapter = new FollowerAdapter(userDataList, Profile.this);
-        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(HorizontalLayout);
-        recyclerView.setAdapter(recycleViewAdapter);
+                System.out.println(t.getMessage()+"Error heer");
+            }
+        });
+//
+//        RecyclerView recyclerView = findViewById(R.id.recycleList);
+//        FollowerAdapter recycleViewAdapter = new FollowerAdapter(userDataList, Profile.this);
+//        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
+//        recyclerView.setLayoutManager(HorizontalLayout);
+//        recyclerView.setAdapter(recycleViewAdapter);
     }
 
     private void generatedata(List<ApiFollowers> apiFollowers) {
