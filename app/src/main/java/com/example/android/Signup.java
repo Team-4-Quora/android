@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android.Retorfit.IPostLogin;
+import com.example.android.Retorfit.Model.SignupResponse;
+import com.example.android.Retorfit.Model.UserRegister;
+import com.example.android.Retorfit.RetrofitLoginBuilder;
+import com.example.android.Retorfit.RetrofitUserBuilder;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -28,22 +34,11 @@ public class Signup extends AppCompatActivity {
         EditText cpwd = findViewById(R.id.et_signup_confirm);
 
         findViewById(R.id.bn_signup_submit).setOnClickListener(v -> {
-            boolean isAllFieldChecked=CheckAllFields();
+            initApi();
 
-            if(isAllFieldChecked){
-                SharedPreferences sharedPreferences = getSharedPreferences("com.example.medsavvy", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("pass", pwd.getText().toString());
-                editor.putString("confirm", cpwd.getText().toString());
-                editor.putString("name", fn.getText().toString());
-                editor.putString("em", em.getText().toString());
-                editor.apply();
-//                initApi(createRequest());
-                Intent k = new Intent(Signup.this, Category.class);
-                startActivity(k);
-                finish();
-            }
         });
+
+//        initApi();
 
 
 
@@ -81,5 +76,53 @@ public class Signup extends AppCompatActivity {
 
         // after all validation return true.
         return true;
+    }
+
+
+    private void initApi(){
+        Retrofit retrofit= RetrofitLoginBuilder.getInstance();
+//        IPostLogin iPostLoginApi=retrofit.create(IPostLogin.class);
+
+
+        UserRegister userRegister=new UserRegister();
+
+        EditText etFirstName=findViewById(R.id.et_signup_name);
+        EditText etPassword=findViewById(R.id.et_signup_password);
+        EditText etEmail=findViewById(R.id.et_signup_email);
+        userRegister.setName(etFirstName.getText().toString());
+        userRegister.setPassword(etPassword.getText().toString());
+//        userDto.setPoints(new Long(0));
+        // userDto.setUsername(etEmail.getText().toString());
+        userRegister.setUserEmail(etEmail.getText().toString());
+        userRegister.setAppId("3");
+
+
+        System.out.println("userregister here:::::"+userRegister.getUserEmail());
+
+        Call<SignupResponse> userregister=retrofit.create(IPostLogin.class).signupquora(userRegister);
+
+       userregister.enqueue(new Callback<SignupResponse>() {
+           @Override
+           public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+            if(!response.body().getStatus().equals("failure")){
+
+                    Intent k = new Intent(Signup.this, Category.class);
+                    startActivity(k);
+
+
+                Toast.makeText(Signup.this,"Success",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(Signup.this,"Unable to Register",Toast.LENGTH_SHORT).show();
+            }
+           }
+
+           @Override
+           public void onFailure(Call<SignupResponse> call, Throwable t) {
+               Toast.makeText(Signup.this,"Failure",Toast.LENGTH_SHORT).show();
+           }
+       });
+
+
     }
 }

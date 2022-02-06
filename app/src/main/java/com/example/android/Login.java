@@ -12,7 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android.Retorfit.IPostLogin;
 import com.example.android.Retorfit.Model.AuthDto;
+import com.example.android.Retorfit.Model.LoginDto;
+import com.example.android.Retorfit.Model.SigninResponse;
+import com.example.android.Retorfit.RetrofitLoginBuilder;
+import com.example.android.Retorfit.RetrofitUserBuilder;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -27,16 +32,7 @@ import retrofit2.Retrofit;
 
 public class Login extends AppCompatActivity {
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//        Button button = findViewById(R.id.bn_login);
-//        button.setOnClickListener(v -> {
-//            Intent i = new Intent(Login.this, HomePage.class);
-//            startActivity(i);
-//        });
-//    }
+
 GoogleSignInClient mGoogleSignInClient;
     private static int RC_SIGN_IN = 100;
     @Override
@@ -51,19 +47,9 @@ GoogleSignInClient mGoogleSignInClient;
 
         });
         findViewById(R.id.bn_login).setOnClickListener(view -> {
-            boolean isAllFieldChecked=CheckAllFields();
-            if(isAllFieldChecked) {
-                //initApi(generateRequest());
-                //  Intent i;
-//                    if (flag == 1) {
+            initApi(generateRequest());
 
-//                    } else {
-                //Toast.makeText(this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
-//                    }
-                Intent k = new Intent(Login.this, HomePage.class);
-                startActivity(k);
-                finish();
-            }
+
 
         });
 
@@ -120,7 +106,7 @@ GoogleSignInClient mGoogleSignInClient;
                 Uri personPhoto = acct.getPhotoUrl();
                 Toast.makeText(this , "User Email : " + personEmail , Toast.LENGTH_SHORT).show();
             }
-            //initApi(generateRequest());
+            initApi(generateRequest());
             startActivity(new Intent(this , HomePage.class));
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
@@ -130,17 +116,25 @@ GoogleSignInClient mGoogleSignInClient;
 
         }
     }
-    public  AuthDto generateRequest()
+    public LoginDto generateRequest()
     {
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
 
         EditText etemail= findViewById(R.id.login_email);
         EditText etpass = findViewById(R.id.login_password);
 
-        AuthDto authDto=new AuthDto();
-        authDto.setUsername(etemail.getText().toString());
-        authDto.setPassword(etpass.getText().toString());
-        System.out.println(authDto.getUsername());
-        return authDto;
+        editor.putString("em",etemail.getText().toString());
+
+        LoginDto loginDto=new LoginDto();
+        loginDto.setUserEmail(etemail.getText().toString().trim());
+        loginDto.setPassword(etpass.getText().toString().trim());
+        loginDto.setAppId("3");
+        System.out.println(loginDto.getUserEmail());
+        return loginDto;
 
     }
     private boolean CheckAllFields() {
@@ -159,35 +153,40 @@ GoogleSignInClient mGoogleSignInClient;
         return true;
     }
 
-//    private void initApi(AuthDto authDto)
-//    {
-//        Retrofit retrofit= UserRetrofitBuilder.getInstance();
-//        IPostUserApi iPostUserApi=retrofit.create(IPostUserApi.class);
-//        Call<ResponseDto> response=iPostUserApi.generateToken(authDto);
-//        SharedPreferences sharedPreferences = getSharedPreferences("com.example.medsavvy", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        response.enqueue(new Callback<ResponseDto>() {
-//            @Override
-//            public void onResponse(Call<ResponseDto> call, Response<ResponseDto> response) {
-//                Toast.makeText(Login.this,"Success",Toast.LENGTH_SHORT).show();
-//                editor.putBoolean("login",true);
-//                editor.putString("points", response.body().getPoints().toString());
-//                editor.putString("name", response.body().getName());
-//                editor.putString("em", response.body().getEmail());
-//                editor.putString("userId", response.body().getId());
+    private void initApi(LoginDto loginDto)
+    {
+        Retrofit retrofit= RetrofitLoginBuilder.getInstance();
+        IPostLogin iPostloginApi=retrofit.create(IPostLogin.class);
+
+
+        Call<SigninResponse> response=iPostloginApi.loginquora(loginDto);
+
+        response.enqueue(new Callback<SigninResponse>() {
+            @Override
+            public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
+//                if(response.body()!=null)
+//                {
+                    Toast.makeText(Login.this,"Successfull Login",Toast.LENGTH_SHORT).show();
+//                    boolean isAllFieldChecked=CheckAllFields();
+//                    if(isAllFieldChecked) {
+
+                        Intent k = new Intent(Login.this, HomePage.class);
+                        startActivity(k);
+                        finish();
+//                    }
+
+//                }
+//                else
+//                {
+//                    Toast.makeText(Login.this,"Failure to login",Toast.LENGTH_SHORT).show();
 //
-//                editor.apply();
-////                Intent i = new Intent(Login.this, HomePage.class);
-////                startActivity(i);
-//                System.out.println(response);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseDto> call, Throwable t) {
-//                Toast.makeText(Login.this,"Failure",Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//    }
+//                }
+            }
+
+            @Override
+            public void onFailure(Call<SigninResponse> call, Throwable t) {
+                Toast.makeText(Login.this,"Failure",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

@@ -1,19 +1,12 @@
-package com.example.android.RecycleView.Model;
+package com.example.android.Retorfit.Model;
 
-public class ApiComment {
+public class CommentDto {
     private String id;
     private String answerId;
     private String message;
     private Long postedOn;
-    private String commentedBy;
+    private String commentBy;
     private String parentComment;
-
-
-
-    public ApiComment(String message, String commentedBy) {
-        this.message = message;
-        this.commentedBy = commentedBy;
-    }
 
     public String getId() {
         return id;
@@ -47,12 +40,12 @@ public class ApiComment {
         this.postedOn = postedOn;
     }
 
-    public String getCommentedBy() {
-        return commentedBy;
+    public String getCommentBy() {
+        return commentBy;
     }
 
-    public void setCommentedBy(String commentedBy) {
-        this.commentedBy = commentedBy;
+    public void setCommentBy(String commentBy) {
+        this.commentBy = commentBy;
     }
 
     public String getParentComment() {
