@@ -1,6 +1,6 @@
 package com.example.android.Retorfit.Model;
 
-public class OrganizationDto {
+public class OrganisationDto {
     private String id;
     private String owner;
     private String name;
