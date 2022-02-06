@@ -26,9 +26,15 @@ public interface IPostUser {
     Call<OrganisationDto> getAnOrganization(@Path(value = "id")String orgId);
 
     @GET("organizations/email/{id}")
-    Call<List<OrganisationDto>> fetchOrganization(@Path(value = "id")String Id);
+    Call<OrganisationDto> fetchOrganization(@Path(value = "id")String Id);
 
     @POST("organizations/add")
     Call<Void> addOrg(@Body OrganisationDto organisationDto);
+
+    @GET("follower/fetch/org/followers/{id}")
+    Call<List<FollowerDto>> getFollowers(@Path(value="id") String orgId);
+
+    @POST("follower/accept/{id}/{requesterId}")
+    Call<Void> acceptRequest(@Path(value="id") String id, @Path(value = "requesterId") String reqId);
 
 }

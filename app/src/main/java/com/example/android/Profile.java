@@ -60,9 +60,20 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
         });
 
        findViewById(R.id.iv_org_create).setOnClickListener(v -> {
-           Intent i=new Intent(Profile.this,Organization.class);
+           Intent i=new Intent(Profile.this, OrganizationCreate.class);
            startActivity(i);
        });
+
+       findViewById(R.id.pending).setOnClickListener(v -> {
+           Intent i=new Intent(Profile.this,Pending.class);
+           startActivity(i);
+       });
+
+       findViewById(R.id.organizdetails).setOnClickListener(v -> {
+           Intent i=new Intent(Profile.this, OrganizationView.class);
+           startActivity(i);
+       });
+
        displaydetails();
 
         displayRecyclerfollower();

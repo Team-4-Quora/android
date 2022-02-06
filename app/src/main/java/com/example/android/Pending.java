@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.example.android.RecycleView.FollowerAdapter;
 import com.example.android.RecycleView.Model.ApiFollowers;
+import com.example.android.RecycleView.PendingPageAdapter;
 import com.example.android.Retorfit.IPostUser;
 import com.example.android.Retorfit.Model.FollowerDto;
 import com.example.android.Retorfit.RetrofitUserBuilder;
@@ -20,12 +21,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class Pending extends AppCompatActivity implements FollowerAdapter.IApiResponseClick {
+public class Pending extends AppCompatActivity implements PendingPageAdapter.IApiResponseClick {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending);
+
+        displayRecyclerpending();
     }
 
     public void displayRecyclerpending() {
@@ -47,8 +50,8 @@ public class Pending extends AppCompatActivity implements FollowerAdapter.IApiRe
                 }
 
                 RecyclerView recyclerView = findViewById(R.id.recycle_pending);
-                FollowerAdapter recycleViewAdapter = new FollowerAdapter(userData, Pending.this);
-                LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Pending.this, LinearLayoutManager.HORIZONTAL, false);
+                PendingPageAdapter recycleViewAdapter = new PendingPageAdapter(userData, Pending.this,Pending.this);
+                LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Pending.this, LinearLayoutManager.VERTICAL, false);
                 recyclerView.setLayoutManager(HorizontalLayout);
                 recyclerView.setAdapter(recycleViewAdapter);
             }

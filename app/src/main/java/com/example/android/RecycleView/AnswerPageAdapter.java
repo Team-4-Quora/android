@@ -84,10 +84,17 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                 for(int i=0;i<react.size();i++)
                 {
                     if(react.get(i).getLike()==true && react.get(i)!=null)
+                    {
                         like=like+1;
+
+                    }
                     else
                         dislike=dislike+1;
                 }
+                holder.upcount.setText(like+"");
+                holder.downcount.setText(dislike+"");
+
+
             }
 
             @Override
@@ -113,7 +120,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(context,"Liked",Toast.LENGTH_SHORT).show();
-                 holder.upcount.setText(like+"");
+//                 holder.upcount.setText(like+"");
                 }
 
                 @Override
@@ -140,7 +147,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Toast.makeText(context,"Dislike",Toast.LENGTH_SHORT).show();
-                    holder.downcount.setText(dislike+"");
+//                    holder.downcount.setText(dislike+"");
 
                 }
 

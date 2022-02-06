@@ -15,7 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class Organization extends AppCompatActivity {
+public class OrganizationCreate extends AppCompatActivity {
     TextView orgemail,orgname,orgdesc;
 
     @Override
@@ -32,35 +32,13 @@ public class Organization extends AppCompatActivity {
         });
     }
 
-    public void addOrganization()
-    {
-        Retrofit retrofit= RetrofitUserBuilder.getInstance();
-        IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<OrganisationDto> organizationDtoCall=iPostUser.getAnOrganization("organization1");
-        organizationDtoCall.enqueue(new Callback<OrganisationDto>() {
-            @Override
-            public void onResponse(Call<OrganisationDto> call, Response<OrganisationDto> response) {
-                orgemail.setText(response.body().getOwner()+"");
-                orgname.setText(response.body().getName()+"");
-                orgdesc.setText(response.body().getDescription()+"");
-                Toast.makeText(Organization.this,"Success organization",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<OrganisationDto> call, Throwable t) {
-                Toast.makeText(Organization.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                System.out.println(t.getMessage());
-
-            }
-    });
-}
 
 public void newOrganization()
 {
     Retrofit retrofit= RetrofitUserBuilder.getInstance();
     IPostUser iPostUser=retrofit.create(IPostUser.class);
     OrganisationDto organisationDto =new OrganisationDto();
-    organisationDto.setId(orgemail.getText().toString());
+  //  organisationDto.setId(orgemail.getText().toString());
     organisationDto.setName(orgname.getText().toString());
     organisationDto.setDescription(orgdesc.getText().toString());
     organisationDto.setOwner("vpalak106@gmail.com");
@@ -69,12 +47,12 @@ public void newOrganization()
     organizationCall.enqueue(new Callback<Void>() {
         @Override
         public void onResponse(Call<Void> call, Response<Void> response) {
-            Toast.makeText(Organization.this,"Success creating organization",Toast.LENGTH_SHORT).show();
+            Toast.makeText(OrganizationCreate.this,"Success creating organization",Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onFailure(Call<Void> call, Throwable t) {
-            Toast.makeText(Organization.this,"Failure",Toast.LENGTH_SHORT).show();
+            Toast.makeText(OrganizationCreate.this,"Failure",Toast.LENGTH_SHORT).show();
 
         }
     });
