@@ -43,7 +43,7 @@ public class FollowerAdapter extends RecyclerView.Adapter<FollowerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolderfollower holder, int position) {
         ApiFollowers apiFollowers = apiResponseList.get(position);
-        holder.followername.setText(apiFollowers.getName() + "");
+        holder.followername.setText(apiFollowers.getEmail() + "");
 
 
         //  Glide.with(holder.quesimg.getContext()).load(apiHome.getImage()).placeholder(R.drawable.ic_login).into(holder.quesimg);

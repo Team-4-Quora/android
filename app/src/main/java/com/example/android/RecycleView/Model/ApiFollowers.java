@@ -11,6 +11,9 @@ public class ApiFollowers {
     private String level;
     private List<String> interest;
 
+    public ApiFollowers() {
+    }
+
     public ApiFollowers(String name) {
         this.name = name;
     }

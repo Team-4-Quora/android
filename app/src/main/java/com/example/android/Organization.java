@@ -2,6 +2,7 @@ package com.example.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,16 +64,16 @@ public void newOrganization()
     Retrofit retrofit= RetrofitUserBuilder.getInstance();
     IPostUser iPostUser=retrofit.create(IPostUser.class);
     OrganizationDto organizationDto=new OrganizationDto();
-    organizationDto.setId(orgemail+"");
-    organizationDto.setName(orgname+"");
-    organizationDto.setDescription(orgdesc+"");
+    organizationDto.setId(orgemail.getText().toString());
+    organizationDto.setName(orgname.getText().toString());
+    organizationDto.setDescription(orgdesc.getText().toString());
     organizationDto.setOwner("vpalak106@gmail.com");
     Call<Void> organizationCall=iPostUser.addOrg(organizationDto);
 
     organizationCall.enqueue(new Callback<Void>() {
         @Override
         public void onResponse(Call<Void> call, Response<Void> response) {
-            Toast.makeText(Organization.this,"Success",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Organization.this,"Success creating organization",Toast.LENGTH_SHORT).show();
         }
 
         @Override

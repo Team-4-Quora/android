@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.RecycleView.FollowerAdapter;
 import com.example.android.RecycleView.Model.ApiFollowers;
 import com.example.android.Retorfit.IPostUser;
+import com.example.android.Retorfit.Model.FollowerDto;
 import com.example.android.Retorfit.Model.UserDto;
 import com.example.android.Retorfit.RetrofitUserBuilder;
 
@@ -33,17 +34,19 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         j=getIntent().getIntExtra("j",0);
-        displayRecyclerfollower();
 
        points=findViewById(R.id.tv_profile_points);
        level=findViewById(R.id.tv_profile_level);
        interest=findViewById(R.id.tv_profile_interest);
 
-       displaydetails();
        findViewById(R.id.iv_org_create).setOnClickListener(v -> {
            Intent i=new Intent(Profile.this,Organization.class);
            startActivity(i);
        });
+       displaydetails();
+
+        displayRecyclerfollower();
+
     }
 
     private void displaydetails(){

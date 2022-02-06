@@ -94,7 +94,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
 
         //render recycle view
         RecyclerView recyclerView = findViewById(R.id.recycleFeed);
-        HomePageAdapter recycleViewAdapter = new HomePageAdapter(userDataList, userAdsDataList, HomePage.this, HomePage.this, HomePage.this);
+        HomePageAdapter recycleViewAdapter = new HomePageAdapter(userDataList, userAdsDataList, HomePage.this, HomePage.this, HomePage.this,0,0);
         LinearLayoutManager VerticalLayout = new LinearLayoutManager(HomePage.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(VerticalLayout);
         recyclerView.setAdapter(recycleViewAdapter);
@@ -146,7 +146,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
                 }
 
                 RecyclerView recyclerView = findViewById(R.id.recycleFeed);
-                HomePageAdapter recycleViewAdapter = new HomePageAdapter(userDataList, userAdsDataList, HomePage.this, HomePage.this, HomePage.this);
+                HomePageAdapter recycleViewAdapter = new HomePageAdapter(userDataList, userAdsDataList, HomePage.this, HomePage.this, HomePage.this,0,0);
                 LinearLayoutManager VerticalLayout = new LinearLayoutManager(HomePage.this, LinearLayoutManager.VERTICAL, false);
                 recyclerView.setLayoutManager(VerticalLayout);
                 recyclerView.setAdapter(recycleViewAdapter);

@@ -1,5 +1,6 @@
 package com.example.android.Retorfit;
 
+import com.example.android.Retorfit.Model.FollowerDto;
 import com.example.android.Retorfit.Model.OrganizationDto;
 import com.example.android.Retorfit.Model.UserDto;
 
@@ -14,6 +15,9 @@ import retrofit2.http.Path;
 public interface IPostUser {
     @GET("user/stats/{email}")
     Call<UserDto> getUserStats(@Path(value = "email") String email);
+
+    @GET("follower/fetch/{type}/{id}")
+    Call<List<FollowerDto>> fetchFollowerData(@Path(value = "type") String type, @Path(value = "id") String id);
 
     @GET("people/fetch/{email}")
     Call<List<UserDto>> getUsersList(@Path(value= "email") String email);
