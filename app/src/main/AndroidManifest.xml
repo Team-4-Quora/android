@@ -14,6 +14,7 @@
         android:theme="@style/Theme.Android"
         android:usesCleartextTraffic="true">
         <activity android:name=".ProfileSearchQuery"></activity>
+        <activity android:name=".Pending"></activity>
         <activity android:name=".Organization" />
         <activity android:name=".Login" />
         <activity android:name=".Category" />

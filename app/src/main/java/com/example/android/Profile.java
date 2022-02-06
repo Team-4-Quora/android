@@ -64,6 +64,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
            startActivity(i);
        });
        displaydetails();
+
         displayRecyclerfollower();
 
     }
@@ -91,23 +92,19 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
 
     public void displayRecyclerfollower() {
 //        List<UserDto> userDataList = new ArrayList<>();
-       // generatedata(userDataList);
+        // generatedata(userDataList);
 //
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
         Call<List<FollowerDto>> userDtoCall=iPostUser.fetchFollowerData("followers","vmat358@gmail.com");
-
-
         userDtoCall.enqueue(new Callback<List<FollowerDto>>() {
             @Override
             public void onResponse(Call<List<FollowerDto>> call, Response<List<FollowerDto>> response) {
                 List<ApiFollowers> userData=new ArrayList<>();
-
                 for(int i=0;i<response.body().size();i++)
                 {
                     ApiFollowers followerDto=new ApiFollowers();
                     followerDto.setEmail(response.body().get(i).getRequesterId());
-
                     userData.add(followerDto);
                 }
 
@@ -116,18 +113,14 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
                 LinearLayoutManager HorizontalLayout = new LinearLayoutManager(Profile.this, LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(HorizontalLayout);
                 recyclerView.setAdapter(recycleViewAdapter);
-
-
             }
 
             @Override
             public void onFailure(Call<List<FollowerDto>> call, Throwable t) {
 
                 System.out.println(t.getMessage()+"Error heer");
-
             }
         });
-
 //
 //        RecyclerView recyclerView = findViewById(R.id.recycleList);
 //        FollowerAdapter recycleViewAdapter = new FollowerAdapter(userDataList, Profile.this);

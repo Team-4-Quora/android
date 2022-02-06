@@ -29,7 +29,6 @@ public class Organization extends AppCompatActivity {
 
         findViewById(R.id.bn_organization_submit).setOnClickListener(v -> {
             newOrganization();
-
         });
     }
 

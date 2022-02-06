@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
+                android:layout_weight="8"
                 android:text="Quora"
                 android:textColor="@color/white"
                 android:textSize="26sp"
@@ -42,10 +42,25 @@
             <ImageView
                 android:id="@+id/iv_org_create"
                 android:layout_width="wrap_content"
-                android:layout_height="11dp"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/ic_cart" />
+
+            <ImageView
+                android:id="@+id/pending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_followers"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/organizdetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_set_as"
+                android:layout_gravity="center"/>
 
             <ImageView
                 android:id="@+id/iv_logout"
@@ -54,6 +69,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:src="@drawable/ic_login" />
+
 
 
         </LinearLayout>
