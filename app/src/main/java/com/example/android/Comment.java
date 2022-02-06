@@ -63,16 +63,18 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
     public void newComment()
     {
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
-        IPostComment iPostComment=retrofit.create(IPostComment.class);
+//        IPostComment iPostComment=retrofit.create(IPostComment.class);
         CommentDto commentDto =new CommentDto();
         commentDto.setCommentBy("Anush Mishra");
-        commentDto.setMessage("hgfgfgffhggjjh");
-        Call<Void> commentCall=iPostComment.savecomment(commentDto);
+        commentDto.setAnswerId("61fcbdcfd36d3324443ee830");
+        commentDto.setMessage("hey");
+        Call<Void> commentCall=retrofit.create(IPostComment.class).savecomment(commentDto);
 
         commentCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(Comment.this,"Comment created",Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
