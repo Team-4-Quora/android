@@ -43,6 +43,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final IApiResponseClick mUserDataInterface;
     private  static Integer postsize;
     private  static Integer adsize;
+    private Integer c=0;
     private final IAddRespClick iAddRespClick;
     private Context context;
 
@@ -89,70 +90,76 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(position%2==0 && apiResponseList.size()> postsize )
-        {
-            ViewHolderOne viewHolder=(ViewHolderOne) holder;
-            ApiQuestion apiHome = apiResponseList.get(postsize);
-            postsize++;
-            viewHolder.quesName.setText(apiHome.getQuestionBy());
-            viewHolder.ques.setText(apiHome.getContent()+"");
-
-            if(apiHome.getPostedOn()!=null){
-            Date date = new Date(apiHome.getPostedOn()* 1000);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            viewHolder.quesdate.setText(sdf.format(date)+"");}
-
-
-            if(apiHome.getId()!=null) {
-                Retrofit retrofit = RetrofitQnaBuilder.getInstance();
-                IPostQna iPostQna = retrofit.create(IPostQna.class);
-                Call<AnswerDto> acceptedans = iPostQna.getAcceptedAnswer(apiHome.getId());
-                System.out.println("Accepted answer not displayed" + apiHome.getContent());
-
-                acceptedans.enqueue(new Callback<AnswerDto>() {
-                    @Override
-                    public void onResponse(Call<AnswerDto> call, Response<AnswerDto> response) {
-                        viewHolder.ans.setText(response.body().getMessage());
-
-                        Date date = new Date(response.body().getPostedOn()* 1000);
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        viewHolder.ansdate.setText(sdf.format(date)+"");
-                   //     viewHolder.ansdate.setText(response.body().getPostedOn() + "");
-                        viewHolder.ansName.setText(response.body().getAnswerBy() + "");
-
-                        Toast.makeText(context, "Accepted answer displayed", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<AnswerDto> call, Throwable t) {
-                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
-                        System.out.println("Accepted view"+t.getMessage());
-
-                    }
-                });
-            }
-
-            viewHolder.viewmore.setOnClickListener(v -> {
-                Intent i=new Intent(context, Answer.class);
-                System.out.println("Die here::::"+apiHome.getId());
-                i.putExtra("QuestionId",apiHome.getId());
-                i.putExtra("QuesText",apiHome.getContent());
-                context.startActivity(i);
-            });
-            ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
+        if(apiResponseList.size()<apiAdvertiseList.size()) {
+            c = apiResponseList.size();
         }
-        else if (apiAdvertiseList.size() > adsize && position%2!=0){
+        else {
+            c = apiAdvertiseList.size();
+        }
+        for(int k=0;k<c;k++) {
+            if (position % 2 == 0 && apiResponseList.size() > postsize) {
+                ViewHolderOne viewHolder = (ViewHolderOne) holder;
+                ApiQuestion apiHome = apiResponseList.get(postsize);
+                postsize++;
+                viewHolder.quesName.setText(apiHome.getQuestionBy());
+                viewHolder.ques.setText(apiHome.getContent() + "");
+
+                if (apiHome.getPostedOn() != null) {
+                    Date date = new Date(apiHome.getPostedOn() * 1000);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    viewHolder.quesdate.setText(sdf.format(date) + "");
+                }
+
+
+                if (apiHome.getId() != null) {
+                    Retrofit retrofit = RetrofitQnaBuilder.getInstance();
+                    IPostQna iPostQna = retrofit.create(IPostQna.class);
+                    Call<AnswerDto> acceptedans = iPostQna.getAcceptedAnswer(apiHome.getId());
+                    System.out.println("Accepted answer not displayed" + apiHome.getContent());
+
+                    acceptedans.enqueue(new Callback<AnswerDto>() {
+                        @Override
+                        public void onResponse(Call<AnswerDto> call, Response<AnswerDto> response) {
+                            viewHolder.ans.setText(response.body().getMessage());
+
+                            Date date = new Date(response.body().getPostedOn() * 1000);
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            viewHolder.ansdate.setText(sdf.format(date) + "");
+                            //     viewHolder.ansdate.setText(response.body().getPostedOn() + "");
+                            viewHolder.ansName.setText(response.body().getAnswerBy() + "");
+
+                            Toast.makeText(context, "Accepted answer displayed", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<AnswerDto> call, Throwable t) {
+                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            System.out.println("Accepted view" + t.getMessage());
+
+                        }
+                    });
+                }
+
+                viewHolder.viewmore.setOnClickListener(v -> {
+                    Intent i = new Intent(context, Answer.class);
+                    System.out.println("Die here::::" + apiHome.getId());
+                    i.putExtra("QuestionId", apiHome.getId());
+                    i.putExtra("QuesText", apiHome.getContent());
+                    context.startActivity(i);
+                });
+                ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
+            } else if (apiAdvertiseList.size() > adsize && position % 2 != 0) {
 //           EmptyViewHolder emptyViewHolder=(EmptyViewHolder) holder;
-            ApiAdvertise apiAdvertise = apiAdvertiseList.get(adsize);
-            adsize++;
+                ApiAdvertise apiAdvertise = apiAdvertiseList.get(adsize);
+                adsize++;
 //            Glide.with(((EmptyViewHolder) holder).advertiseimg.getContext()).load(apiAdvertise.getImage()).placeholder(R.drawable.ic_login).into(((EmptyViewHolder) holder).advertiseimg);
 //            RequestOptions options = new RequestOptions().dontTransform()
 //                    .diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(placeholder);
 //            if (null != context && !TextUtils.isEmpty("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg") && null != imageView) {//                Glide.with(context).load(getGlideUrl("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg")).apply(options).into(imageView);//            }
-            ((EmptyViewHolder) holder).rootView2.setOnClickListener(v ->
-                    iAddRespClick.onUserClickadd(apiAdvertise));
+                ((EmptyViewHolder) holder).rootView2.setOnClickListener(v ->
+                        iAddRespClick.onUserClickadd(apiAdvertise));
+            }
         }
-
     }
 
     @Override
