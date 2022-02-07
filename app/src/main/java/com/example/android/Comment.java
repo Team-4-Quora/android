@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,9 +68,13 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
 //        IPostComment iPostComment=retrofit.create(IPostComment.class);
         CommentDto commentDto =new CommentDto();
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+
+
         commentDto.setCommentBy("Anush Mishra");
-        commentDto.setAnswerId("61fcbdcfd36d3324443ee830");
-        commentDto.setMessage("hey");
+        Intent i=getIntent();
+        commentDto.setAnswerId(i.getExtras().getString("answerid"));
+        commentDto.setMessage(commentact.getText().toString());
         Call<Void> commentCall=retrofit.create(IPostComment.class).savecomment(commentDto);
 
         commentCall.enqueue(new Callback<Void>() {

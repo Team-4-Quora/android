@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +48,9 @@ public class OrganizationView extends AppCompatActivity implements FollowerAdapt
     {
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<OrganisationDto> organizationDtoCall=iPostUser.fetchOrganization("vinay63@gmail.com");
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+        String em=sharedPreferences.getString("em","");
+        Call<OrganisationDto> organizationDtoCall=iPostUser.fetchOrganization(em);
         organizationDtoCall.enqueue(new Callback<OrganisationDto>() {
             @Override
             public void onResponse(Call<OrganisationDto> call, Response<OrganisationDto> response) {

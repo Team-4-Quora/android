@@ -98,6 +98,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
         String em=sharedPreferences.getString("em","");
+
         Call<UserDto> userDtoCall=iPostUser.getUserStats(em);
         userDtoCall.enqueue(new Callback<UserDto>() {
             @Override

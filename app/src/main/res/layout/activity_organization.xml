@@ -63,7 +63,7 @@
         android:ems="10"
         android:textSize="24sp"
         android:hint="Description"
-        android:inputType="textPassword"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -22,8 +22,11 @@ import com.example.android.R;
 import com.example.android.RecycleView.Model.ApiAnswer;
 import com.example.android.RecycleView.Model.ApiQuestion;
 import com.example.android.Retorfit.IPostQna;
+import com.example.android.Retorfit.IPostUser;
+import com.example.android.Retorfit.Model.PointRequest;
 import com.example.android.Retorfit.Model.ReactionDto;
 import com.example.android.Retorfit.RetrofitQnaBuilder;
+import com.example.android.Retorfit.RetrofitUserBuilder;
 import com.google.gson.internal.$Gson$Preconditions;
 
 import org.w3c.dom.Text;
@@ -114,7 +117,9 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
             ReactionDto reactionDto=new ReactionDto();
             reactionDto.setLike(true);
             reactionDto.setAnswerId(apiAnswer.getId());
-            reactionDto.setReactionBy("vpalak@gmail.com");
+            SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
+            String email=sharedPreferences.getString("em","");
+            reactionDto.setReactionBy(email);
             Call<Void> reactionresponse=iPostQna.save(reactionDto);
             reactionresponse.enqueue(new Callback<Void>() {
                 @Override
@@ -170,6 +175,28 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Toast.makeText(context,"Accepted answer set",Toast.LENGTH_SHORT).show();
+                        String answerBy=apiAnswer.getAnswerBy();
+
+                        Retrofit retrofit2=RetrofitUserBuilder.getInstance();
+                        IPostUser iPostUser=retrofit2.create(IPostUser.class);
+                        PointRequest pointRequest=new PointRequest();
+                        pointRequest.setAmount(Long.parseLong("5"));
+                        pointRequest.setEmail(answerBy);
+                        pointRequest.setInc(true);
+                        Call<Void> userpoints=iPostUser.incUserPoints(pointRequest);
+                        userpoints.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                Toast.makeText(context,"Points increased",Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Toast.makeText(context,"Points increase failed",Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
                     }
 
                     @Override
@@ -185,6 +212,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
         //  Glide.with(holder.quesimg.getContext()).load(apiAnswer.getImage()).placeholder(R.drawable.ic_login).into(holder.quesimg);
         holder.comment.setOnClickListener(v -> {
             Intent i=new Intent(context, Comment.class);
+            i.putExtra("answerid",apiAnswer.getId());
             context.startActivity(i);
         });
         holder.rootView.setOnClickListener(new View.OnClickListener() {

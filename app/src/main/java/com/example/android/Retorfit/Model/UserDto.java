@@ -2,10 +2,20 @@ package com.example.android.Retorfit.Model;
 
 public class UserDto {
 
+    private String id;
     private String email;
     private Long points;
     private String level;
     private String name;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
