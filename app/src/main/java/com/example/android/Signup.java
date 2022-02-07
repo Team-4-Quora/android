@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.Retorfit.IPostLogin;
+import com.example.android.Retorfit.IPostUser;
 import com.example.android.Retorfit.Model.SignupResponse;
+import com.example.android.Retorfit.Model.UserDto;
 import com.example.android.Retorfit.Model.UserRegister;
 import com.example.android.Retorfit.RetrofitLoginBuilder;
 import com.example.android.Retorfit.RetrofitUserBuilder;
@@ -106,11 +108,39 @@ public class Signup extends AppCompatActivity {
            public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
             if(!response.body().getStatus().equals("failure")){
 
-                    Intent k = new Intent(Signup.this, Category.class);
+                SharedPreferences sharedPreferences = getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("name",etFirstName.getText().toString());
+                editor.apply();
+
+                Intent k = new Intent(Signup.this, Category.class);
                     startActivity(k);
 
 
                 Toast.makeText(Signup.this,"Success",Toast.LENGTH_SHORT).show();
+
+                Retrofit retrofit1=RetrofitUserBuilder.getInstance();
+                IPostUser iPostUser=retrofit1.create(IPostUser.class);
+
+                UserDto userDto=new UserDto();
+                userDto.setName(etFirstName.getText().toString());
+                userDto.setEmail(etEmail.getText().toString());
+                userDto.setPoints(Long.parseLong("0"));
+                userDto.setLevel("Begineer");
+
+                Call<Void> userresponse=iPostUser.saveuser(userDto);
+                userresponse.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(Signup.this,"Stored into database",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(Signup.this,"Unable to store",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             else {
                 Toast.makeText(Signup.this,"Unable to Register",Toast.LENGTH_SHORT).show();

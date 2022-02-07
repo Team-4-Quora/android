@@ -5,6 +5,15 @@ public class UserDto {
     private String email;
     private Long points;
     private String level;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;

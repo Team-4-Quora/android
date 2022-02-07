@@ -25,6 +25,9 @@ public interface IPostUser {
     @GET("organizations/{id}")
     Call<OrganisationDto> getAnOrganization(@Path(value = "id")String orgId);
 
+    @POST("user/add")
+    Call<Void> saveuser(@Body UserDto userDto);
+
     @GET("organizations/email/{id}")
     Call<OrganisationDto> fetchOrganization(@Path(value = "id")String Id);
 

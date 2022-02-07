@@ -15,7 +15,7 @@ import com.example.android.RecycleView.Model.ApiOrganisation;
 
 import java.util.List;
 
-public class OrganisationAdapter extends RecyclerView.Adapter<OrganisationAdapter.ViewHolderfollower>{
+public class OrganisationAdapter extends RecyclerView.Adapter<OrganisationAdapter.ViewHolderOrg>{
     private final List<ApiOrganisation> apiResponseList;
     private final IApiResponseClick mUserDataInterface;
 
@@ -28,15 +28,15 @@ public class OrganisationAdapter extends RecyclerView.Adapter<OrganisationAdapte
 
     @NonNull
     @Override
-    public ViewHolderfollower onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolderOrg onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_org, parent, false);
-        return new ViewHolderfollower(view);
+        return new ViewHolderOrg(view);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderfollower holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderOrg holder, int position) {
         ApiOrganisation apiorg = apiResponseList.get(position);
         holder.orgname.setText(apiorg.getName() + "");
         holder.orgowner.setText(apiorg.getOwner()+"");
@@ -61,14 +61,14 @@ public class OrganisationAdapter extends RecyclerView.Adapter<OrganisationAdapte
         void onUserClick(ApiOrganisation apiorg);
     }
 
-    public static class ViewHolderfollower extends RecyclerView.ViewHolder {
+    public static class ViewHolderOrg extends RecyclerView.ViewHolder {
         private final View rootView;
         private final ImageView orgimg;
         private final TextView orgname;
         private final TextView orgowner;
         private final TextView orgdesc;
 
-        public ViewHolderfollower(View view) {
+        public ViewHolderOrg(View view) {
             super(view);
             rootView = view;
             orgname=view.findViewById(R.id.tv_org_name);

@@ -1,6 +1,8 @@
 package com.example.android;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +30,7 @@ import retrofit2.Retrofit;
 public class Profile extends AppCompatActivity implements FollowerAdapter.IApiResponseClick {
     private int j;
 
-    TextView points,level,interest;
+    TextView points,level,interest,email,name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,15 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
        points=findViewById(R.id.tv_profile_points);
        level=findViewById(R.id.tv_profile_level);
        interest=findViewById(R.id.tv_profile_interest);
+       email=findViewById(R.id.tv_mainprofile_email);
+       name=findViewById(R.id.tv_mainprofile_name);
+
+//
+//        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+//        String em=sharedPreferences.getString("em","");
+//        String prof=sharedPreferences.getString("name","");
+//       email.setText(em+"");
+//       name.setText(prof+"");
 
 
         SearchView searchView;
@@ -83,12 +94,20 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
     private void displaydetails(){
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<UserDto> userDtoCall=iPostUser.getUserStats("vinaymatta63@gmail.com");
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+        String em=sharedPreferences.getString("em","");
+        Call<UserDto> userDtoCall=iPostUser.getUserStats(em);
         userDtoCall.enqueue(new Callback<UserDto>() {
             @Override
             public void onResponse(Call<UserDto> call, Response<UserDto> response) {
                 points.setText(response.body().getPoints()+"");
                 level.setText(response.body().getLevel()+"");
+                email.setText(response.body().getEmail()+"");
+               name.setText(response.body().getName()+"");
+               interest.setText(sharedPreferences.getString("cate",""));
+
                 Toast.makeText(Profile.this,"Success",Toast.LENGTH_SHORT).show();
             }
 
@@ -107,7 +126,10 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
 //
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<List<FollowerDto>> userDtoCall=iPostUser.fetchFollowerData("followers","vmat358@gmail.com");
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+        String email=sharedPreferences.getString("em","");
+
+        Call<List<FollowerDto>> userDtoCall=iPostUser.fetchFollowerData("followers",email);
         userDtoCall.enqueue(new Callback<List<FollowerDto>>() {
             @Override
             public void onResponse(Call<List<FollowerDto>> call, Response<List<FollowerDto>> response) {
