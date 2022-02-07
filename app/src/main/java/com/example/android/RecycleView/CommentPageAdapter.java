@@ -73,7 +73,6 @@ public class CommentPageAdapter extends RecyclerView.Adapter<CommentPageAdapter.
         private final TextView comment;
         private final Button reply;
 
-
         public ViewHolderComment(View view) {
             super(view);
             rootView = view;

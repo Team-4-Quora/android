@@ -185,6 +185,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
         //  Glide.with(holder.quesimg.getContext()).load(apiAnswer.getImage()).placeholder(R.drawable.ic_login).into(holder.quesimg);
         holder.comment.setOnClickListener(v -> {
             Intent i=new Intent(context, Comment.class);
+            i.putExtra("answerid",apiAnswer.getId());
             context.startActivity(i);
         });
         holder.rootView.setOnClickListener(new View.OnClickListener() {

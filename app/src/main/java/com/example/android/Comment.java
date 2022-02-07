@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,17 +18,20 @@ import com.example.android.Retorfit.IPostComment;
 import com.example.android.Retorfit.IPostUser;
 import com.example.android.Retorfit.Model.CommentDto;
 import com.example.android.Retorfit.Model.OrganisationDto;
+import com.example.android.Retorfit.RetrofitQnaBuilder;
 import com.example.android.Retorfit.RetrofitUserBuilder;
+import com.example.android.empty.Response;
+import com.example.android.empty.ResponseItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
+
 import retrofit2.Retrofit;
 
-public class Comment extends AppCompatActivity implements CommentPageAdapter.IApiResponseClick{
+public class Comment extends AppCompatActivity implements CommentPageAdapter.IApiResponseClick,CommentAdapter.IResponseItemClick{
 
     TextView commentby,commenton,commentmsg,commentact;
     @Override
@@ -40,6 +45,8 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
         findViewById(R.id.commentpost).setOnClickListener(v -> {
             newComment();
         });
+
+        getComment();
     }
 
     public void displayRecyclecomment(){
@@ -62,19 +69,20 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
 
     public void newComment()
     {
-        Retrofit retrofit= RetrofitUserBuilder.getInstance();
+        Retrofit retrofit= RetrofitQnaBuilder.getInstance();
 //        IPostComment iPostComment=retrofit.create(IPostComment.class);
         CommentDto commentDto =new CommentDto();
-        commentDto.setCommentBy("Anush Mishra");
-        commentDto.setAnswerId("61fcbdcfd36d3324443ee830");
-        commentDto.setMessage("hey");
+        SharedPreferences sharedPreferences=getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+        String email=sharedPreferences.getString("em","default");
+        commentDto.setCommentBy(email);
+        commentDto.setAnswerId(getIntent().getStringExtra("answerid"));
+        commentDto.setMessage(commentact.getText().toString());
         Call<Void> commentCall=retrofit.create(IPostComment.class).savecomment(commentDto);
 
         commentCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
                 Toast.makeText(Comment.this,"Comment created",Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -85,8 +93,45 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
         });
     }
 
+    public void getComment()
+    {
+        Retrofit retrofit= RetrofitQnaBuilder.getInstance();
+        IPostComment iPostComment = retrofit.create(IPostComment.class);
+//        Call<Response> commentCall=retrofit.create(IPostComment.class).fetcheachcomment("61fcbdcfd36d3324443ee830");
+        Call<List<ResponseItem>> responseCall = iPostComment.fetcheachcomment(getIntent().getStringExtra("answerid"));
+
+        responseCall.enqueue(new Callback<List<ResponseItem>>() {
+
+            @Override
+            public void onResponse(Call<List<ResponseItem>> call, retrofit2.Response<List<ResponseItem>> response) {
+                if(response.isSuccessful()) {
+                    RecyclerView recyclerView = findViewById(R.id.recyclecomment);
+                    CommentAdapter commentAdapter = new CommentAdapter(response.body(), Comment.this, Comment.this);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(Comment.this, LinearLayoutManager.HORIZONTAL, false));
+                    recyclerView.setAdapter(commentAdapter);
+                }else{
+                    Toast.makeText(Comment.this,response.message(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ResponseItem>> call, Throwable t) {
+//                Toast.makeText(Comment.this,"Comment can't fetch",Toast.LENGTH_SHORT).show();
+//                System.out.println(t.getMessage()+"Error here");
+                Toast.makeText(Comment.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
     @Override
-    public void onUserClick(ApiComment apiproduct) {
+    public void onUserClick(ResponseItem responseItem) {
+
+    }
+
+    @Override
+    public void onUserClick(ApiComment apiComment) {
 
     }
 }

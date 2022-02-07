@@ -1,6 +1,8 @@
 package com.example.android.Retorfit;
 
 import com.example.android.Retorfit.Model.CommentDto;
+import com.example.android.empty.Response;
+import com.example.android.empty.ResponseItem;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ public interface IPostComment {
     Call<List<CommentDto>> fetchcomment(@Path(value = "id") String id, @Path(value = "parentId") String parent);
 
     @GET("qna/comment/fetch/{id}")
-    Call<List<CommentDto>> fetcheachcomment(@Path(value = "id") String id);
+    Call<List<ResponseItem>> fetcheachcomment(@Path("id") String id);
 
     @POST("qna/comment/add")
     Call<Void> savecomment(@Body CommentDto commentDto);
