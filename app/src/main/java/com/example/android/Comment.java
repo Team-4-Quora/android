@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -72,6 +74,7 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
         Retrofit retrofit= RetrofitQnaBuilder.getInstance();
 //        IPostComment iPostComment=retrofit.create(IPostComment.class);
         CommentDto commentDto =new CommentDto();
+
         SharedPreferences sharedPreferences=getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
         String email=sharedPreferences.getString("em","default");
         commentDto.setCommentBy(email);

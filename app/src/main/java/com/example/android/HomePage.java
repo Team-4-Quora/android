@@ -1,11 +1,13 @@
 package com.example.android;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -144,6 +146,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
         Call<List<QuestionDto>> feedQues=iPostQna.fetchquesByValue("category",cate+"");
 
         feedQues.enqueue(new Callback<List<QuestionDto>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<QuestionDto>> call, Response<List<QuestionDto>> response) {
                 List<QuestionDto> questionDto=response.body();
@@ -161,7 +164,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
                     System.out.println(apiQuestion.getContent()+"Question here");
                     userDataList.add(apiQuestion);
                 }
-
+                userDataList.sort((a,b) -> (int) (-b.getPostedOn()+a.getPostedOn()));
                 RecyclerView recyclerView = findViewById(R.id.recycleFeed);
                 HomePageAdapter recycleViewAdapter = new HomePageAdapter(userDataList, userAdsDataList, HomePage.this, HomePage.this, HomePage.this,0,0);
                 LinearLayoutManager VerticalLayout = new LinearLayoutManager(HomePage.this, LinearLayoutManager.VERTICAL, false);

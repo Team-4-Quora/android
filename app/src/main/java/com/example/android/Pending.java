@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.android.RecycleView.FollowerAdapter;
@@ -37,7 +39,10 @@ public class Pending extends AppCompatActivity implements PendingPageAdapter.IAp
 //
         Retrofit retrofit= RetrofitUserBuilder.getInstance();
         IPostUser iPostUser=retrofit.create(IPostUser.class);
-        Call<List<FollowerDto>> userDtoCall=iPostUser.fetchFollowerData("pending","vmat358@gmail.com");
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+        String email=sharedPreferences.getString("em","");
+
+        Call<List<FollowerDto>> userDtoCall=iPostUser.fetchFollowerData("pending",email);
         userDtoCall.enqueue(new Callback<List<FollowerDto>>() {
             @Override
             public void onResponse(Call<List<FollowerDto>> call, Response<List<FollowerDto>> response) {

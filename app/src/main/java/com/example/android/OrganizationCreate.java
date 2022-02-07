@@ -2,6 +2,8 @@ package com.example.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +43,9 @@ public void newOrganization()
   //  organisationDto.setId(orgemail.getText().toString());
     organisationDto.setName(orgname.getText().toString());
     organisationDto.setDescription(orgdesc.getText().toString());
-    organisationDto.setOwner("vpalak106@gmail.com");
+    SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+     String email=sharedPreferences.getString("em","");
+    organisationDto.setOwner(email);
     Call<Void> organizationCall=iPostUser.addOrg(organisationDto);
 
     organizationCall.enqueue(new Callback<Void>() {

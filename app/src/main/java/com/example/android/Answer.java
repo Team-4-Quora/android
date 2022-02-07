@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,7 +63,9 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
 
         ans_text=findViewById(R.id.et_ans);
         AnswerDto answerDto=new AnswerDto();
-        answerDto.setAnswerBy("vpalak@gmail.com");
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+        String email=sharedPreferences.getString("em","");
+        answerDto.setAnswerBy(email);
         answerDto.setQuestionId(quesId);
         answerDto.setMessage(ans_text.getText().toString());
         Call<Void> ansresponse=iPostQna.saveans(answerDto);

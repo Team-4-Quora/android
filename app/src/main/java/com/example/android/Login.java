@@ -197,6 +197,7 @@ GoogleSignInClient mGoogleSignInClient;
         EditText etpass = findViewById(R.id.login_password);
 
         editor.putString("em",etemail.getText().toString());
+        editor.apply();
 
         LoginDto loginDto=new LoginDto();
         loginDto.setUserEmail(etemail.getText().toString().trim());

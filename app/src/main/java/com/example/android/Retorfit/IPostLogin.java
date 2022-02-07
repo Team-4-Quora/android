@@ -1,6 +1,7 @@
 package com.example.android.Retorfit;
 
 import com.example.android.Retorfit.Model.CommentDto;
+import com.example.android.Retorfit.Model.InterestDto;
 import com.example.android.Retorfit.Model.LoginDto;
 import com.example.android.Retorfit.Model.SigninResponse;
 import com.example.android.Retorfit.Model.SignupResponse;
@@ -16,4 +17,7 @@ public interface IPostLogin {
 
     @POST("authentication/authenticate/register")
     Call<SignupResponse> signupquora(@Body UserRegister userRegister);
+
+    @POST("authentication/authenticate/interest")
+    Call<Void> updateInterest(@Body InterestDto interestDto);
 }

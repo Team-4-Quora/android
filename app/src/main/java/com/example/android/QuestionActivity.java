@@ -75,10 +75,12 @@ public class QuestionActivity extends AppCompatActivity {
         ques_content=findViewById(R.id.et_ques);
 
         QuestionDto questionDto=new QuestionDto();
-//
-//        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
-//        String email=sharedPreferences.getString("em","");
-        questionDto.setQuestionBy("vinaymatta63@gmail.com");
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+        String email=sharedPreferences.getString("em","");
+       // System.out.println(email+"Here");
+
+        questionDto.setQuestionBy(email);
         questionDto.setText(ques_content.getText().toString());
         System.out.println("===="+questionDto.getText());
         questionDto.setCategory(cate + "");
@@ -90,6 +92,7 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 System.out.println("=============="+response.body().toString());
+
                 Toast.makeText(QuestionActivity.this,"successfull",Toast.LENGTH_SHORT).show();
             }
 

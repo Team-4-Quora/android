@@ -2,6 +2,7 @@ package com.example.android.RecycleView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,11 @@ public class  PendingPageAdapter extends RecyclerView.Adapter<PendingPageAdapter
         holder.acceptPending.setOnClickListener(v -> {
             Retrofit retrofit= RetrofitUserBuilder.getInstance();
             IPostUser iPostUser=retrofit.create(IPostUser.class);
-            Call<Void> pendinglist=iPostUser.acceptRequest("vmat358@gmail.com",apiFollowers.getEmail());
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+            String em=sharedPreferences.getString("em","");
+
+            Call<Void> pendinglist=iPostUser.acceptRequest(em,apiFollowers.getEmail());
 
             pendinglist.enqueue(new Callback<Void>() {
                 @Override
