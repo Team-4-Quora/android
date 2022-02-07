@@ -116,7 +116,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     Retrofit retrofit = RetrofitQnaBuilder.getInstance();
                     IPostQna iPostQna = retrofit.create(IPostQna.class);
                     Call<AnswerDto> acceptedans = iPostQna.getAcceptedAnswer(apiHome.getId());
-                    System.out.println("Accepted answer not displayed" + apiHome.getContent());
+                   // System.out.println("Accepted answer not displayed" + apiHome.getContent());
 
                     acceptedans.enqueue(new Callback<AnswerDto>() {
                         @Override
@@ -129,13 +129,13 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             //     viewHolder.ansdate.setText(response.body().getPostedOn() + "");
                             viewHolder.ansName.setText(response.body().getAnswerBy() + "");
 
-                            Toast.makeText(context, "Accepted answer displayed", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, "Accepted answer displayed", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<AnswerDto> call, Throwable t) {
-                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
-                            System.out.println("Accepted view" + t.getMessage());
+                           // Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                           // System.out.println("Accepted view" + t.getMessage());
 
                         }
                     });

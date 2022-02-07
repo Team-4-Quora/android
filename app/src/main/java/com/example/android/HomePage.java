@@ -171,13 +171,13 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
                 recyclerView.setLayoutManager(VerticalLayout);
                 recyclerView.setAdapter(recycleViewAdapter);
 
-                Toast.makeText(HomePage.this,"Success get ques",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(HomePage.this,"Success get ques",Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onFailure(Call<List<QuestionDto>> call, Throwable t) {
-                Toast.makeText(HomePage.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(HomePage.this,t.getMessage(),Toast.LENGTH_SHORT).show();
 
                 System.out.println(t.getMessage() + "Error here");
             }

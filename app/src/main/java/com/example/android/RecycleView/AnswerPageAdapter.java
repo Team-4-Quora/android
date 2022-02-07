@@ -145,7 +145,9 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
             reactionDto.setLike(false);
             reactionDto.setAnswerId(apiAnswer.getId());
             System.out.println("Answer id:::::::: "+apiAnswer.getId());
-            reactionDto.setReactionBy("vpalak@gmail.com");
+            SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
+         String email=sharedPreferences.getString("em","");
+            reactionDto.setReactionBy(email);
 
             Call<Void> reactionresponse=iPostQna.save(reactionDto);
             reactionresponse.enqueue(new Callback<Void>() {
