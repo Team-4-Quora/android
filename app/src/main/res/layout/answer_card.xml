@@ -21,15 +21,15 @@
 
             <ImageView
                 android:id="@+id/answer_prof"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/ic_followers"
+                android:src="@drawable/ic_person"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.137"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                 />
 
             <TextView
                 android:id="@+id/ans_name"
@@ -47,7 +47,7 @@
                 android:id="@+id/ans_timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="74dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
                 android:text="Timestamp"
                 android:textSize="24sp"
@@ -63,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:scrollbars="vertical"
+                android:layout_marginHorizontal="8dp"
                 android:text="Answer"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"

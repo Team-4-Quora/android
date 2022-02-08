@@ -1,5 +1,6 @@
 package com.example.android;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,6 +76,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(Answer.this,"Answer posted sucessfully",Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -93,13 +96,13 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
         IPostQna iPostQna=retrofit.create(IPostQna.class);
         Call<List<AnswerDto>> answerlist=iPostQna.fetchByQuestionId(quesId);
         answerlist.enqueue(new Callback<List<AnswerDto>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<AnswerDto>> call, Response<List<AnswerDto>> response) {
                 List<AnswerDto> temp=response.body();
 
-                for(int i=0;i<temp.size();i++)
-                {
-                    ApiAnswer answerDto=new ApiAnswer();
+                for(int i=0;i<temp.size();i++) {
+                    ApiAnswer answerDto = new ApiAnswer();
                     answerDto.setMessage(temp.get(i).getMessage());
                     answerDto.setAnswerBy(temp.get(i).getAnswerBy());
                     answerDto.setPostedOn(temp.get(i).getPostedOn());
@@ -108,15 +111,17 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
 
                     userDataList.add(answerDto);
 
+                }
+                userDataList.sort((a,b) -> (int) (b.getPostedOn()-a.getPostedOn()));
 
-                    RecyclerView recyclerView=findViewById(R.id.recycleans);
+                RecyclerView recyclerView=findViewById(R.id.recycleans);
                     AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,b,Answer.this);
                     LinearLayoutManager VerticalLayout= new LinearLayoutManager(Answer.this,LinearLayoutManager.VERTICAL,false);
                     recyclerView.setLayoutManager(VerticalLayout);
                     recyclerView.setAdapter(recycleViewAdapter);
 
 
-                }
+
             }
 
             @Override

@@ -47,7 +47,7 @@ public class HomeSearchQuery extends AppCompatActivity implements QuestionPageAd
                     for(int i=0;i<response.body().size();i++)
                     {
                         ApiQuestion apiQuestion=new ApiQuestion();
-                        apiQuestion.setQuestionBy(response.body().get(i).getId());
+                        apiQuestion.setQuestionBy(response.body().get(i).getQuestionBy());
                         apiQuestion.setContent(response.body().get(i).getText());
                         apiQuestion.setCategory(response.body().get(i).getCategory());
                         apiQuestions.add(apiQuestion);

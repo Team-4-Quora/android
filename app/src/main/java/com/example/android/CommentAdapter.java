@@ -15,6 +15,8 @@ import com.example.android.RecycleView.CommentPageAdapter;
 import com.example.android.RecycleView.Model.ApiComment;
 import com.example.android.empty.ResponseItem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolderComment> {
@@ -41,7 +43,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolderComment holder, int position) {
         ResponseItem responseItem=responseItemList.get(position);
         holder.commentName.setText(responseItem.getCommentBy());
-        holder.commentDate.setText(responseItem.getPostedOn()+"");
+
+        Date date = new Date(responseItem.getPostedOn()* 1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        holder.commentDate.setText(sdf.format(date)+"");
+
+//        holder.commentDate.setText(responseItem.getPostedOn()+"");
         holder.comment.setText(responseItem.getMessage());
         //  Glide.with(holder.quesimg.getContext()).load(apiAnswer.getImage()).placeholder(R.drawable.ic_login).into(holder.quesimg);
         holder.reply.setOnClickListener(v -> {
