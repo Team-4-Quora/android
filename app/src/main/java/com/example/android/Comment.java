@@ -33,6 +33,8 @@ import retrofit2.Callback;
 
 import retrofit2.Retrofit;
 
+//give proper name to activities
+
 public class Comment extends AppCompatActivity implements CommentPageAdapter.IApiResponseClick,CommentAdapter.IResponseItemClick{
 
     TextView commentby,commenton,commentmsg,commentact;
@@ -51,6 +53,7 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
         getComment();
     }
 
+    // unused method
     public void displayRecyclecomment(){
         List<ApiComment> userDataList=new ArrayList<>();
         generatedata(userDataList);

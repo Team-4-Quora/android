@@ -188,9 +188,9 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
     private void generateads(List<ApiAdvertise> apiAdvertises)
     {
         apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
-        apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
-        apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
-        apiAdvertises.add(new ApiAdvertise("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg"));
+        apiAdvertises.add(new ApiAdvertise("https://genderbasedstereotypeswithinadvertisements.files.wordpress.com/2017/10/einstein12.jpg"));
+        apiAdvertises.add(new ApiAdvertise("https://www.designyourway.net/blog/wp-content/uploads/2017/12/adidas_ad_3_by_mdr9inchnail.jpg"));
+        apiAdvertises.add(new ApiAdvertise("https://static.india.com/wp-content/uploads/2019/06/45-1-415x246.jpg"));
 
     }
 

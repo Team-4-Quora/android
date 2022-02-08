@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.android.Answer;
 import com.example.android.Comment;
 import com.example.android.R;
@@ -92,13 +93,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-//        if(apiResponseList.size()<apiAdvertiseList.size()) {
-//            c = apiResponseList.size();
-//        }
-//        else {
-//            c = apiAdvertiseList.size();
-//        }
-//        for(int k=0;k<c;k++) {
             if (holder instanceof ViewHolderOne) {
                 if(postsize<apiResponseList.size()){
                 ViewHolderOne viewHolder = (ViewHolderOne) holder;
@@ -164,7 +158,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 if(adsize<apiAdvertiseList.size()){
                 ApiAdvertise apiAdvertise = apiAdvertiseList.get(adsize);
                 adsize++;
-//            Glide.with(((EmptyViewHolder) holder).advertiseimg.getContext()).load(apiAdvertise.getImage()).placeholder(R.drawable.ic_login).into(((EmptyViewHolder) holder).advertiseimg);
+            Glide.with(((EmptyViewHolder) holder).advertiseimg.getContext()).load(apiAdvertise.getImage()).placeholder(R.drawable.ic_login).into(((EmptyViewHolder) holder).advertiseimg);
 //            RequestOptions options = new RequestOptions().dontTransform()
 //                    .diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(placeholder);
 //            if (null != context && !TextUtils.isEmpty("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg") && null != imageView) {//                Glide.with(context).load(getGlideUrl("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg")).apply(options).into(imageView);//            }

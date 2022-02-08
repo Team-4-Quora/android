@@ -23,6 +23,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+
+//Fix lint warnings
 public class QuestionActivity extends AppCompatActivity {
     Button ques;
     EditText ques_content;
@@ -41,6 +43,8 @@ public class QuestionActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         });
+
+        // use proper variable names
 
         Spinner spino = findViewById(R.id.categories);
 
@@ -67,6 +71,8 @@ public class QuestionActivity extends AppCompatActivity {
         });
     }
 
+
+    //method name should always be camel cased
     public void addquestion()
     {
         Retrofit retrofit=RetrofitQnaBuilder.getInstance();
@@ -91,6 +97,7 @@ public class QuestionActivity extends AppCompatActivity {
         quesresponse.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                //use logs for debugging
                 System.out.println("=============="+response.body().toString());
 
                 Toast.makeText(QuestionActivity.this,"successfull",Toast.LENGTH_SHORT).show();
