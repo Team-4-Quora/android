@@ -45,4 +45,7 @@ public interface IPostUser {
     @POST("follower/accept/{id}/{requesterId}")
     Call<Void> acceptRequest(@Path(value="id") String id, @Path(value = "requesterId") String reqId);
 
+    @POST("follower/add")
+    Call<Void> followUser(@Body FollowerDto followerDto);
+
 }
