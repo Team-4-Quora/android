@@ -74,7 +74,7 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
 
                 @Override
                 public void onFailure(Call<SigninResponse> call, Throwable t) {
-                    Toast.makeText(Profile.this,"Logout fail",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this,"Logout fail''",Toast.LENGTH_SHORT).show();
 
                 }
             });
