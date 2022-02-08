@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.RecycleView.FollowerAdapter;
 import com.example.android.RecycleView.Model.ApiFollowers;
+import com.example.android.Retorfit.IPostLogin;
 import com.example.android.Retorfit.IPostUser;
 import com.example.android.Retorfit.Model.FollowerDto;
+import com.example.android.Retorfit.Model.LogoutDto;
+import com.example.android.Retorfit.Model.SigninResponse;
 import com.example.android.Retorfit.Model.UserDto;
+import com.example.android.Retorfit.RetrofitLoginBuilder;
 import com.example.android.Retorfit.RetrofitUserBuilder;
 
 import java.util.ArrayList;
@@ -53,9 +57,33 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
         button.setOnClickListener(v -> {
 //           / signOut();
             SharedPreferences sharedPreferences = getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
+
+            Retrofit retrofit= RetrofitLoginBuilder.getInstance();
+            IPostLogin iPostloginApi=retrofit.create(IPostLogin.class);
+
+            LogoutDto logout=new LogoutDto(
+                    sharedPreferences.getString("em",""),
+                    "3"
+            );
+            Call<SigninResponse> logoutdetail=iPostloginApi.logout(logout);
+            logoutdetail.enqueue(new Callback<SigninResponse>() {
+                @Override
+                public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
+                    Toast.makeText(Profile.this,"Logout succesfull",Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<SigninResponse> call, Throwable t) {
+                    Toast.makeText(Profile.this,"Logout fail",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.apply();
+
 
             Intent intent=new Intent(Profile.this,Login.class);
             startActivity(intent);

@@ -1,17 +1,12 @@
 package com.example.android.Retorfit.Model;
 
-public class LoginDto {
+public class LogoutDto {
     private String userEmail;
-    private String password;
     private String appId;
-    private String deviceId;
 
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
+    public LogoutDto(String userEmail, String appId) {
+        this.userEmail = userEmail;
+        this.appId = appId;
     }
 
     public String getUserEmail() {
@@ -20,14 +15,6 @@ public class LoginDto {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getAppId() {

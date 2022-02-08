@@ -14,11 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.Retorfit.IPostLogin;
-import com.example.android.Retorfit.Model.AuthDto;
 import com.example.android.Retorfit.Model.LoginDto;
 import com.example.android.Retorfit.Model.SigninResponse;
 import com.example.android.Retorfit.RetrofitLoginBuilder;
-import com.example.android.Retorfit.RetrofitUserBuilder;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -98,6 +96,10 @@ GoogleSignInClient mGoogleSignInClient;
 //                    var10000.append((CharSequence)it.getToken());
                     st = it.getToken();
                     //ReturnTopic(st);
+                    SharedPreferences sharedPreferences=getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("tokenid",it.getToken());
+                    editor.apply();
                     Log.d("tokenid", String.valueOf(it.getToken()));
                 }
             }));
@@ -203,6 +205,8 @@ GoogleSignInClient mGoogleSignInClient;
         loginDto.setUserEmail(etemail.getText().toString().trim());
         loginDto.setPassword(etpass.getText().toString().trim());
         loginDto.setAppId("3");
+
+        loginDto.setDeviceId(sharedPreferences.getString("tokenid",""));
         System.out.println(loginDto.getUserEmail());
         return loginDto;
 
