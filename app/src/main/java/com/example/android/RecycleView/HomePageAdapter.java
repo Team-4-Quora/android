@@ -99,7 +99,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //            c = apiAdvertiseList.size();
 //        }
 //        for(int k=0;k<c;k++) {
-            if (position % 2 == 0 && apiResponseList.size() > postsize) {
+            if (holder instanceof ViewHolderOne) {
+                if(postsize<apiResponseList.size()){
                 ViewHolderOne viewHolder = (ViewHolderOne) holder;
                 ApiQuestion apiHome = apiResponseList.get(postsize);
                 postsize++;
@@ -157,9 +158,10 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     i.putExtra("Quesby",apiHome.getQuestionBy());
                     context.startActivity(i);
                 });
-                ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
-            } else if (apiAdvertiseList.size() > adsize && position % 2 != 0) {
+                ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));}
+            } else {
 //           EmptyViewHolder emptyViewHolder=(EmptyViewHolder) holder;
+                if(adsize<apiAdvertiseList.size()){
                 ApiAdvertise apiAdvertise = apiAdvertiseList.get(adsize);
                 adsize++;
 //            Glide.with(((EmptyViewHolder) holder).advertiseimg.getContext()).load(apiAdvertise.getImage()).placeholder(R.drawable.ic_login).into(((EmptyViewHolder) holder).advertiseimg);
@@ -168,7 +170,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //            if (null != context && !TextUtils.isEmpty("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg") && null != imageView) {//                Glide.with(context).load(getGlideUrl("https://m.media-amazon.com/images/I/81HgVEqBVuL._SL1500_.jpg")).apply(options).into(imageView);//            }
                 ((EmptyViewHolder) holder).rootView2.setOnClickListener(v ->
                         iAddRespClick.onUserClickadd(apiAdvertise));
-            }
+            }}
 //        }
     }
 
