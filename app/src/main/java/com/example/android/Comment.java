@@ -78,7 +78,8 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
         SharedPreferences sharedPreferences=getSharedPreferences("com.example.android", Context.MODE_PRIVATE);
         String email=sharedPreferences.getString("em","default");
         commentDto.setCommentBy(email);
-        commentDto.setAnswerId(getIntent().getStringExtra("answerid"));
+        String ansid=getIntent().getStringExtra("answerid");
+        commentDto.setAnswerId(ansid);
         commentDto.setMessage(commentact.getText().toString());
         Call<Void> commentCall=retrofit.create(IPostComment.class).savecomment(commentDto);
 
@@ -86,6 +87,10 @@ public class Comment extends AppCompatActivity implements CommentPageAdapter.IAp
             @Override
             public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
                 Toast.makeText(Comment.this,"Comment created",Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(Comment.this,Comment.class);
+                i.putExtra("answerid",ansid);
+                startActivity(i);
+                finish();
             }
 
             @Override

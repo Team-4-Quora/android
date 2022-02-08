@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Answer;
+import com.example.android.Comment;
 import com.example.android.R;
 import com.example.android.RecycleView.Model.ApiAdvertise;
 import com.example.android.RecycleView.Model.ApiHome;
@@ -129,6 +130,13 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             //     viewHolder.ansdate.setText(response.body().getPostedOn() + "");
                             viewHolder.ansName.setText(response.body().getAnswerBy() + "");
 
+
+                            ((ViewHolderOne) holder).feed_comment.setOnClickListener(v -> {
+                                Intent i=new Intent(context, Comment.class);
+                                i.putExtra("answerid",response.body().getId());
+                                context.startActivity(i);
+                            });
+
                            // Toast.makeText(context, "Accepted answer displayed", Toast.LENGTH_SHORT).show();
                         }
 
@@ -185,6 +193,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private final TextView ans;
         private final TextView ansName;
         private final TextView ansdate;
+        private final Button feed_comment;
 
         private final Button  viewmore;
 
@@ -201,6 +210,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ans=view.findViewById(R.id.feed_answer);
             ansName=view.findViewById(R.id.feed_ans_name);
             ansdate=view.findViewById(R.id.feed_ans_timestamp);
+            feed_comment=view.findViewById(R.id.feed_commentbutton);
 
 
         }

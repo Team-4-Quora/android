@@ -30,23 +30,6 @@
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="16dp" />
 
-            <ImageView
-                android:id="@+id/iv_org_create"
-                android:layout_width="wrap_content"
-                android:layout_height="11dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_cart" />
-
-            <ImageView
-                android:id="@+id/iv_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_login" />
-
-
         </LinearLayout>
 
 
