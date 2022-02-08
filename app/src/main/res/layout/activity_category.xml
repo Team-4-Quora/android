@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="#5D001E"
         app:titleTextColor="@color/white"
-        app:title="Quora"
+        app:title="Select Category"
         android:textSize="24sp"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
