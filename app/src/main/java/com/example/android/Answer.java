@@ -37,7 +37,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
     EditText ans_text;
     Button post_ans;
     Intent i;
-    String quesId,quesText;
+    String quesId,quesText,quesBy;
   private Boolean b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
         i=getIntent();
         quesText=i.getExtras().getString("QuesText");
         quesId=i.getExtras().getString("QuestionId");
+        quesBy=i.getExtras().getString("Quesby");
 
         System.out.println("Question Id Here::::::"+quesId);
         TextView ques_text=findViewById(R.id.tv_curr_ques);
@@ -115,7 +116,7 @@ public class Answer extends AppCompatActivity implements AnswerPageAdapter.IApiR
                 userDataList.sort((a,b) -> (int) (b.getPostedOn()-a.getPostedOn()));
 
                 RecyclerView recyclerView=findViewById(R.id.recycleans);
-                    AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,b,Answer.this);
+                    AnswerPageAdapter recycleViewAdapter=new AnswerPageAdapter(userDataList,Answer.this,b,Answer.this,quesBy);
                     LinearLayoutManager VerticalLayout= new LinearLayoutManager(Answer.this,LinearLayoutManager.VERTICAL,false);
                     recyclerView.setLayoutManager(VerticalLayout);
                     recyclerView.setAdapter(recycleViewAdapter);

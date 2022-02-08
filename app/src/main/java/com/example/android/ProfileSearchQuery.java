@@ -95,7 +95,7 @@ public class ProfileSearchQuery extends AppCompatActivity  implements Organisati
                         userlist.add(apiUser);
 
                         RecyclerView recyclerView = findViewById(R.id.user_recycle);
-                        UserAdapter recycleViewAdapter = new UserAdapter(userlist, ProfileSearchQuery.this);
+                        UserAdapter recycleViewAdapter = new UserAdapter(userlist, ProfileSearchQuery.this,ProfileSearchQuery.this);
                         LinearLayoutManager HorizontalLayout = new LinearLayoutManager(ProfileSearchQuery.this, LinearLayoutManager.HORIZONTAL, false);
                         recyclerView.setLayoutManager(HorizontalLayout);
                         recyclerView.setAdapter(recycleViewAdapter);

@@ -44,15 +44,17 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
     private final List<ApiAnswer> apiResponseList;
     private final IApiResponseClick mUserDataInterface;
     private final Boolean b;
+    private final String QuestionBy;
     private final Context context ;
     int like=0,dislike=0;
 
 
-    public AnswerPageAdapter(List<ApiAnswer> apiResponseList, IApiResponseClick mUserDataInterface, Boolean b, Context context) {
+    public AnswerPageAdapter(List<ApiAnswer> apiResponseList, IApiResponseClick mUserDataInterface, Boolean b, Context context,String questionBy) {
         this.apiResponseList = apiResponseList;
         this.mUserDataInterface = mUserDataInterface;
         this.b = false;
         this.context = context;
+        this.QuestionBy=questionBy;
     }
 
     @NonNull
@@ -176,28 +178,34 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                 acceptanswer.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(context,"Accepted answer set",Toast.LENGTH_SHORT).show();
-                        String answerBy=apiAnswer.getAnswerBy();
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
+                       if(sharedPreferences.getString("em","").equals(QuestionBy)) {
+                            Toast.makeText(context, "Accepted answer set", Toast.LENGTH_SHORT).show();
+                            String answerBy = apiAnswer.getAnswerBy();
 
-                        Retrofit retrofit2=RetrofitUserBuilder.getInstance();
-                        IPostUser iPostUser=retrofit2.create(IPostUser.class);
-                        PointRequest pointRequest=new PointRequest();
-                        pointRequest.setAmount(Long.parseLong("5"));
-                        pointRequest.setEmail(answerBy);
-                        pointRequest.setInc(true);
-                        Call<Void> userpoints=iPostUser.incUserPoints(pointRequest);
-                        userpoints.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                Toast.makeText(context,"Points increased",Toast.LENGTH_SHORT).show();
-                            }
+                            Retrofit retrofit2 = RetrofitUserBuilder.getInstance();
+                            IPostUser iPostUser = retrofit2.create(IPostUser.class);
+                            PointRequest pointRequest = new PointRequest();
+                            pointRequest.setAmount(Long.parseLong("5"));
+                            pointRequest.setEmail(answerBy);
+                            pointRequest.setInc(true);
+                            Call<Void> userpoints = iPostUser.incUserPoints(pointRequest);
+                            userpoints.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    Toast.makeText(context, "Points increased", Toast.LENGTH_SHORT).show();
+                                }
 
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-                                Toast.makeText(context,"Points increase failed",Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    Toast.makeText(context, "Points increase failed", Toast.LENGTH_SHORT).show();
 
-                            }
-                        });
+                                }
+                            });
+                        }else
+                        {
+                            Toast.makeText(context,"Answer cannot be set",Toast.LENGTH_SHORT).show();
+                        }
 
                     }
 
