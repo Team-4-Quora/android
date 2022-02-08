@@ -79,8 +79,6 @@ GoogleSignInClient mGoogleSignInClient;
         });
         findViewById(R.id.bn_login).setOnClickListener(view -> {
 
-            initApi(generateRequest());
-
             FirebaseInstanceId var10000 = FirebaseInstanceId.getInstance();
             Intrinsics.checkExpressionValueIsNotNull(var10000, "FirebaseInstanceId.getInstance()");
             var10000.getInstanceId().addOnSuccessListener((OnSuccessListener)(new OnSuccessListener() {
@@ -96,6 +94,8 @@ GoogleSignInClient mGoogleSignInClient;
 //                    var10000.append((CharSequence)it.getToken());
                     st = it.getToken();
                     //ReturnTopic(st);
+                    initApi(generateRequest(it.getToken()));
+
                     SharedPreferences sharedPreferences=getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("tokenid",it.getToken());
@@ -117,7 +117,6 @@ GoogleSignInClient mGoogleSignInClient;
 
                 }
             }));
-
 
 
 
@@ -177,7 +176,7 @@ GoogleSignInClient mGoogleSignInClient;
                 Uri personPhoto = acct.getPhotoUrl();
                 Toast.makeText(this , "User Email : " + personEmail , Toast.LENGTH_SHORT).show();
             }
-            initApi(generateRequest());
+            initApi(generateRequest(""));
             startActivity(new Intent(this , HomePage.class));
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
@@ -187,7 +186,7 @@ GoogleSignInClient mGoogleSignInClient;
 
         }
     }
-    public LoginDto generateRequest()
+    public LoginDto generateRequest(String token)
     {
 
 
@@ -206,7 +205,7 @@ GoogleSignInClient mGoogleSignInClient;
         loginDto.setPassword(etpass.getText().toString().trim());
         loginDto.setAppId("3");
 
-        loginDto.setDeviceId(sharedPreferences.getString("tokenid",""));
+        loginDto.setDeviceId(token);
         System.out.println(loginDto.getUserEmail());
         return loginDto;
 

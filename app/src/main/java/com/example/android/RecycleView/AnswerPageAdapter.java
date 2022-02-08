@@ -179,7 +179,7 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         SharedPreferences sharedPreferences = context.getSharedPreferences("com.example.android",Context.MODE_PRIVATE);
-                       // if(apiAnswer.getAnswerBy().equals(sharedPreferences.getString("em",""))) {
+                       if(sharedPreferences.getString("em","").equals(QuestionBy)) {
                             Toast.makeText(context, "Accepted answer set", Toast.LENGTH_SHORT).show();
                             String answerBy = apiAnswer.getAnswerBy();
 
@@ -202,10 +202,10 @@ public class AnswerPageAdapter extends RecyclerView.Adapter<AnswerPageAdapter.Vi
 
                                 }
                             });
-//                        }else
-//                        {
-//                            Toast.makeText(context,"Answer cannot be set",Toast.LENGTH_SHORT).show();
-//                        }
+                        }else
+                        {
+                            Toast.makeText(context,"Answer cannot be set",Toast.LENGTH_SHORT).show();
+                        }
 
                     }
 
