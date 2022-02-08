@@ -154,6 +154,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     System.out.println("Die here::::" + apiHome.getId());
                     i.putExtra("QuestionId", apiHome.getId());
                     i.putExtra("QuesText", apiHome.getContent());
+                    i.putExtra("Quesby",apiHome.getQuestionBy());
                     context.startActivity(i);
                 });
                 ((ViewHolderOne) holder).rootView.setOnClickListener(v -> mUserDataInterface.onUserClick(apiHome));
