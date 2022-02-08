@@ -52,10 +52,7 @@ public class Category extends AppCompatActivity {
         spino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        category[position],
-                        Toast.LENGTH_SHORT)
-                        .show();
+             //   Toast.makeText(getApplicationContext(),category[position],Toast.LENGTH_SHORT).show();
                                cate=category[position];
 
                 Retrofit retrofit= RetrofitLoginBuilder.getInstance();
@@ -93,13 +90,13 @@ public class Category extends AppCompatActivity {
                 interestresponse.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(Category.this,"Category sent",Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(Category.this,"Category sent",Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(Category.this,"Category cannot be sent",Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(Category.this,"Category cannot be sent",Toast.LENGTH_SHORT).show();
 
                     }
                 });
