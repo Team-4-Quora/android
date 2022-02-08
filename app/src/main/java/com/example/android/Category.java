@@ -83,7 +83,7 @@ public class Category extends AppCompatActivity {
                     temp="5";
                 }
                 interestlist.add(temp);
-                interest.setInterest(interestlist);
+                interest.setInterests(interestlist);
 
                 Call<Void> interestresponse=iPostLogin.updateInterest(interest);
 

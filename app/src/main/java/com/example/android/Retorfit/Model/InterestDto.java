@@ -4,7 +4,7 @@ import java.util.List;
 
 public class InterestDto {
     private String userEmail;
-    private List<String> interest;
+    private List<String> interests;
     private String appId;
 
     public String getUserEmail() {
@@ -15,12 +15,12 @@ public class InterestDto {
         this.userEmail = userEmail;
     }
 
-    public List<String> getInterest() {
-        return interest;
+    public List<String> getInterests() {
+        return interests;
     }
 
-    public void setInterest(List<String> interest) {
-        this.interest = interest;
+    public void setInterests(List<String> interests) {
+        this.interests = interests;
     }
 
     public String getAppId() {

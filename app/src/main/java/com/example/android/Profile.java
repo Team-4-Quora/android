@@ -79,10 +79,10 @@ public class Profile extends AppCompatActivity implements FollowerAdapter.IApiRe
                 }
             });
 
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
+//
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.clear();
+//            editor.apply();
 
 
             Intent intent=new Intent(Profile.this,Login.class);
