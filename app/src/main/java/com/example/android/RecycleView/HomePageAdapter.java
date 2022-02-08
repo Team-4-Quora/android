@@ -91,13 +91,13 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(apiResponseList.size()<apiAdvertiseList.size()) {
-            c = apiResponseList.size();
-        }
-        else {
-            c = apiAdvertiseList.size();
-        }
-        for(int k=0;k<c;k++) {
+//        if(apiResponseList.size()<apiAdvertiseList.size()) {
+//            c = apiResponseList.size();
+//        }
+//        else {
+//            c = apiAdvertiseList.size();
+//        }
+//        for(int k=0;k<c;k++) {
             if (position % 2 == 0 && apiResponseList.size() > postsize) {
                 ViewHolderOne viewHolder = (ViewHolderOne) holder;
                 ApiQuestion apiHome = apiResponseList.get(postsize);
@@ -160,7 +160,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((EmptyViewHolder) holder).rootView2.setOnClickListener(v ->
                         iAddRespClick.onUserClickadd(apiAdvertise));
             }
-        }
+//        }
     }
 
     @Override

@@ -164,7 +164,7 @@ public class HomePage extends AppCompatActivity implements HomePageAdapter.IApiR
                     System.out.println(apiQuestion.getContent()+"Question here");
                     userDataList.add(apiQuestion);
                 }
-                userDataList.sort((a,b) -> (int) (-b.getPostedOn()+a.getPostedOn()));
+                userDataList.sort((a,b) -> (int) (b.getPostedOn()-a.getPostedOn()));
                 RecyclerView recyclerView = findViewById(R.id.recycleFeed);
                 HomePageAdapter recycleViewAdapter = new HomePageAdapter(userDataList, userAdsDataList, HomePage.this, HomePage.this, HomePage.this,0,0);
                 LinearLayoutManager VerticalLayout = new LinearLayoutManager(HomePage.this, LinearLayoutManager.VERTICAL, false);
